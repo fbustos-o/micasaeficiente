@@ -1,4 +1,5 @@
 # Mi Casa Eficiente
+![image](https://github.com/user-attachments/assets/1ac1b78a-8dce-4496-a54a-b6bd3a1a2b4c)
 
 Breve manual de uso de los métodos GET, POST y PUT del back-end de “Mi casa Eficiente”
 
@@ -675,4 +676,3 @@ Vary: Accept
 6. (Opcional) Editar equipos: Si indicaste que deseas editar los equipos, realiza una solicitud PUT a `/mi_casa_eficiente/edita_equipos/<int:pk>` con los datos de los equipos.
 7. Obtener recomendaciones: Realiza una solicitud GET a `/mi_casa_eficiente/recomendaciones/<int:pk>` para recibir las recomendaciones de eficiencia energética.
 
-![image.png](image.png)![image](https://github.com/user-attachments/assets/1ac1b78a-8dce-4496-a54a-b6bd3a1a2b4c)
