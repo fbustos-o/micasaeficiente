@@ -1,15 +1,17 @@
-# Mi Casa Eficiente
+ Mi Casa Eficiente
 
 Breve manual de uso de los métodos GET, POST y PUT del back-end de “Mi casa Eficiente”
 
-Para descargar el repositorio debes ir a: 
+Para utilizarlo puedes ir a: https://github.com/fbustos-o/micasaeficiente
 
 Las bases de datos a pre-cargar en el back-end son las siguientes: 
 
-1. comunas_zt.csv
+1. comunas_zt.csv 
 2. perfilConsumoTipo.csv
 3. equipos.csv
 4. recomendaciones.csv
+
+Se puede descargar desde el siguiente [link](https://minenergia-my.sharepoint.com/:f:/g/personal/fbustos_minenergia_cl/Eqws0780Kf1DvVfP0xhIfDQBZ3AU_7WRxs19yDHkjso6HA?e=OzZa6A). 
 
 ## Pasos de consulta
 
@@ -80,7 +82,62 @@ Consulta comunas, selecciona comunas
 
 Métodos del paso: 
 
-**GET** **:** Este *endpoint*, entrega un listado de todas las regiones del país y un subconjunto de las comunas dentro de la región con su nombre en *string* y su Código Único Tributario (CUT) en forma de id_comuna en formato *integer y* el clima que representa con su respectivo id (puede que se repitan algunas comunas con múltiples climas, esos se deben consultar en el ingreso)*.*
+**GET** **:** Este *endpoint*, entrega un listado de todas las regiones del país y un subconjunto de las comunas dentro de la región con su nombre en *string,* su Código Único Tributario (CUT) en forma de id_comuna en formato *integer y* el clima que representa con su respectivo id (puede que se repitan algunas comunas con múltiples climas, esos se deben consultar en el ingreso)*.*
+
+```json
+Ejemplo solo para la comuna de Arica: 
+HTTP 200 OK
+Allow: POST, GET, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "De Arica y Parinacota": {
+        "comunas": [
+            [
+                "Arica",
+                15101,
+                2
+            ],
+            [
+                "Arica",
+                15101,
+                3
+            ],
+            [
+                "Arica",
+                15101,
+                4
+            ],
+            [
+                "Camarones",
+                15102,
+                2
+            ],
+            [
+                "Camarones",
+                15102,
+                3
+            ],
+            [
+                "Camarones",
+                15102,
+                4
+            ],
+            [
+                "General Lagos",
+                15202,
+                1
+            ],
+            [
+                "Putre",
+                15201,
+                1
+            ]
+        ]
+    }
+  }
+```
 
 > Se puede visitar: [https://climatiza.exploradorenergia.cl/home](https://climatiza.exploradorenergia.cl/home) para entender el primer paso.
 > 
@@ -617,3 +674,5 @@ Vary: Accept
 5. Indicar si deseas editar equipos: Realiza una solicitud POST a `/mi_casa_eficiente/equipos/<int:pk>` con `{"edita_equipos": true}` o `{"edita_equipos": false}`.
 6. (Opcional) Editar equipos: Si indicaste que deseas editar los equipos, realiza una solicitud PUT a `/mi_casa_eficiente/edita_equipos/<int:pk>` con los datos de los equipos.
 7. Obtener recomendaciones: Realiza una solicitud GET a `/mi_casa_eficiente/recomendaciones/<int:pk>` para recibir las recomendaciones de eficiencia energética.
+
+![image.png](image.png)![image](https://github.com/user-attachments/assets/1ac1b78a-8dce-4496-a54a-b6bd3a1a2b4c)
