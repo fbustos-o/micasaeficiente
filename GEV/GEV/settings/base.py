@@ -13,7 +13,7 @@ SECRET_KEY = "django-insecure-%_5jg=7z(&ljq3hctnbc=#m=h%$t9!3pb-3r@*^7#aywi6qjy!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','micasaeficiente.exploradorenergia.cl']
 
 
 # Application definition
