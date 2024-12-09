@@ -694,6 +694,15 @@ class resultadosSerializer(serializers.ModelSerializer):
             'len': sum(instance['consumo_len']),
             'pel': sum(instance['consumo_pel'])
         }
+        # agregar emisiones
+        emisiones_perfil = {
+            'elec': sum(instance['consumo_elec']),
+            'gn': sum(instance['consumo_gn']),
+            'glp': sum(instance['consumo_glp']),
+            'ker': sum(instance['consumo_ker']),
+            'len': sum(instance['consumo_len']),
+            'pel': sum(instance['consumo_pel'])
+        }
         '''
         energia_perfil = {
             'elec': [],
@@ -719,6 +728,13 @@ class resultadosSerializer(serializers.ModelSerializer):
         for medida in id_medidas:
             medidas_dict[medida] = recomendaciones.objects.filter(id=medida).values()
         
+        #datos de resultados de medidas seleccionadas //VALORES A RESOLVER AUN
+        resultado_medidas = {
+            'eficiencia_energética': [12, 35],
+            'Ahorro anual potencial de Energía': [4500, 15500],
+            'Emisiones anuales evitadas estimadas': [1, 4]
+        }
+
         resultados = {
             'id' : instance['id'],
             'id_comuna' : instance['id_comuna'],
@@ -732,6 +748,7 @@ class resultadosSerializer(serializers.ModelSerializer):
             'Resumen de consumos' : energia_perfil,
             'Costo_consumo_anual' : costo_perfil,
             'Medidas seleccionadas': medidas_dict,
+            'Resultados medidas': resultado_medidas
         }
         return (resultados)
 
