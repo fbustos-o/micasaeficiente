@@ -659,6 +659,27 @@ Vary: Accept
 }
 ```
 
+## Pasos Adicionales
+
+consulta de equipos completa: 
+
+<aside>
+🔗
+
+`../mi_casa_eficiente/lista_equipos/`
+
+</aside>
+
+consulta de recomendaciones completa:
+
+<aside>
+🔗
+
+`../mi_casa_eficiente/lista_recomendaciones/`
+
+</aside>
+
+
 ## Consideraciones
 
 - El paso 2.1 y 3.1 son opcionales. Si no los utilizas, la API generará recomendaciones basadas en datos promedio.
