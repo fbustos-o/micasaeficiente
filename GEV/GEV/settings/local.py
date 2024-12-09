@@ -14,6 +14,7 @@ DATABASES = {
         'DATABASE_PORT': '5432',
     }
 }
+'''
 
 DATABASES = {
     'default': {
@@ -26,17 +27,6 @@ DATABASES = {
         'PASSWORD': 'PVM13postgres',
         'HOST': 'ernc.dgf.uchile.cl',
         'PORT': '8085',
-    }
-}
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'GEV',
-        'USER': 'postgres',
-        'PASSWORD': 'FB.Energia2024',
-        'HOST': '127.0.0.1',
-        'DATABASE_PORT': '5432',
     }
 }
 
