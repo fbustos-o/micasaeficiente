@@ -5,6 +5,17 @@ from apps.f_aux.geo_data import getGeoData, llamado
 import pandas as pd
 import numpy as np
 
+#para lista de recomendaciones
+class RecomendacionesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = recomendaciones
+        fields = '__all__'
+
+#para lista de equipos
+class EquiposSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = equipos
+        fields = '__all__'
 
 # serializardor de comunas
 class ComunasSerializer(serializers.ModelSerializer):

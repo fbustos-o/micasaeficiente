@@ -2,8 +2,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from apps.mi_casa_eficiente.models import comunas_zt,  consultasResultados #agregar tablas modelos
-from apps.mi_casa_eficiente.api.serializers import  ComunasSerializer, resultadosSerializer, MCESerializer #agregar los serializadores
+from apps.mi_casa_eficiente.models import comunas_zt,  consultasResultados, equipos, recomendaciones #agregar tablas modelos
+from apps.mi_casa_eficiente.api.serializers import  ComunasSerializer, resultadosSerializer, MCESerializer, EquiposSerializer, RecomendacionesSerializer #agregar los serializadores
 
 ## 1 - consulta comunas e ingresa datos de ubicación para consulta y pregunta que energéticos usa. 
 @api_view(['GET', 'POST'])
@@ -19,7 +19,7 @@ def consulta_comunas(request):
             for region in regiones:
                 nombre_region = region['region']
                 # Obtener las comunas únicas para la región actual
-                comunas = comunas_zt.objects.filter(region=nombre_region).values_list('comuna', 'id_comuna').distinct()
+                comunas = comunas_zt.objects.filter(region=nombre_region).values_list('comuna', 'id_comuna', 'clima').distinct()
                 # Agregar la región y sus comunas al diccionario
                 comunas_por_region[nombre_region] = {
                     'comunas': list(comunas)
@@ -110,7 +110,7 @@ def edita_equipos(request, pk=None):
 
 ## 4 - Recomendaciones y elección
 @api_view(['GET', 'PUT'])
-def recomendaciones(request, pk=None):
+def recomendaciones_el(request, pk=None):
     #GET: Lista de recomendaciones
     resumen_resultados = consultasResultados.objects.filter(id = pk).first() 
     if request.method == 'GET':
@@ -137,3 +137,38 @@ def recomendaciones_priorizadas(request, pk=None):
         #función que arroja los tipos de recomendaciones posibles ordenadas
         respuesta = serializer.paso_5_get(serializer.data)
         return Response(respuesta, status = status.HTTP_200_OK)
+    
+
+## consultas auxiliares
+
+## 1 - consulta lista de equipos
+@api_view(['GET'])
+def lista_equipos(request):
+    #GET: Lista de equipos
+    if request.method == 'GET':
+        try: 
+            # obtiene lista de equipos
+            all_equipos = equipos.objects.all()
+            serializer = EquiposSerializer(all_equipos, many=True) # Important: many=True for QuerySets
+            response = serializer.data  # Serialize the data
+            status_code = status.HTTP_200_OK
+        except Exception as e:
+            response = str(e)
+            status_code = status.HTTP_400_BAD_REQUEST
+        return Response(response,status_code)
+
+## 2 - consulta lista de recomendaciones
+@api_view(['GET'])
+def lista_recomendaciones(request):
+    #GET: Lista de equipos
+    if request.method == 'GET':
+        try: 
+            # obtiene lista de equipos
+            all_recomendaciones = recomendaciones.objects.all()
+            serializer = RecomendacionesSerializer(all_recomendaciones, many=True) # Important: many=True for QuerySets
+            response = serializer.data  # Serialize the data
+            status_code = status.HTTP_200_OK
+        except Exception as e:
+            response = str(e)
+            status_code = status.HTTP_400_BAD_REQUEST
+        return Response(response,status_code)
