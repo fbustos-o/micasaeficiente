@@ -685,6 +685,15 @@ class resultadosSerializer(serializers.ModelSerializer):
             'len': sum(instance['consumo_len']),
             'pel': sum(instance['consumo_pel'])
         }
+        #agregar costo energético. 
+        costo_perfil = {
+            'elec': sum(instance['consumo_elec']),
+            'gn': sum(instance['consumo_gn']),
+            'glp': sum(instance['consumo_glp']),
+            'ker': sum(instance['consumo_ker']),
+            'len': sum(instance['consumo_len']),
+            'pel': sum(instance['consumo_pel'])
+        }
         '''
         energia_perfil = {
             'elec': [],
@@ -721,6 +730,7 @@ class resultadosSerializer(serializers.ModelSerializer):
             'dormitorios' : instance['dormitorios'],
             'anio_construccion' : instance['anio_construccion'],
             'Resumen de consumos' : energia_perfil,
+            'Costo_consumo_anual' : costo_perfil,
             'Medidas seleccionadas': medidas_dict,
         }
         return (resultados)
