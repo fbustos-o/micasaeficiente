@@ -2,11 +2,11 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['micasaeficiente.exploradorenergia.cl']
+ALLOWED_HOSTS = []
 '''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'termico',  #nombre base de datos general para calculadora de demanda térmica.
         'USER': 'postgres',
         'PASSWORD': 'FB.Energia2022',
@@ -17,24 +17,21 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS' : {
-            'options': '-c search_path=mi_casa_eficiente,public'
-        },
-        'NAME': 'minenergia',
-        'USER': 'pascual.vergara',
-        'PASSWORD': 'PVM13postgres',
-        'HOST': 'ernc.dgf.uchile.cl',
-        'PORT': '8085',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'GEV',
+        'USER': 'postgres',
+        'PASSWORD': 'FB.Energia2022',
+        'HOST': '127.0.0.1',
+        'DATABASE_PORT': '5432',
     }
 }
 '''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'GEV',
+        'NAME': 'MCE',
         'USER': 'postgres',
-        'PASSWORD': 'FB.Energia2024',
+        'PASSWORD': 'FB.Energia2022',
         'HOST': '127.0.0.1',
         'DATABASE_PORT': '5432',
     }

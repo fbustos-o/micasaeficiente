@@ -13,7 +13,7 @@ SECRET_KEY = "django-insecure-%_5jg=7z(&ljq3hctnbc=#m=h%$t9!3pb-3r@*^7#aywi6qjy!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','micasaeficiente.exploradorenergia.cl']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -35,7 +35,7 @@ LOCAL_APPS = [
 # Aplicaciones que vienen de terceros (librerias externas)
 THIRD_APPS = [
     'rest_framework', #libreria de REST
-    'simple_history', #libreria de almacenamiento de historiales.
+    #'simple_history', #libreria de almacenamiento de historiales.
     'drf_yasg', #another swagger generator
     #''
 ]
@@ -57,7 +57,10 @@ ROOT_URLCONF = "GEV.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            'apps/mi_casa_eficiente/template',  # If you have a project-level template directory
+            #'apps' / 'mi_casa_eficiente' / 'static',  # App's static directory
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

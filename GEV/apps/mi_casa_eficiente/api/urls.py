@@ -1,6 +1,6 @@
 from django.urls import path
 from .api import consulta_comunas, datos_demanda, edita_consumo, datos_equipos, edita_equipos, recomendaciones_el, recomendaciones_priorizadas, lista_equipos, lista_recomendaciones
-
+from . import views
 urlpatterns = [
     path('comunas/', consulta_comunas, name = 'Consulta Comunas'), #Paso 1: lista de comunas disponibles y POST de elección de comuna y consumos de energía que posee la vivienda.
     path('demanda/<int:pk>', datos_demanda, name = 'Datos Demanda'), #Paso 2: consulta si conoces tu consumo y deseas editarlo
@@ -11,4 +11,7 @@ urlpatterns = [
     path('recomendaciones_select/<int:pk>', recomendaciones_priorizadas, name = 'Recomendaciones Seleccionadas'), # Paso final: lista de consulta GET en función del paso 4, resultados de consumos con selección de recomendaciones tomada. 
     path('lista_equipos/', lista_equipos, name = 'Lista Equipos'), #lista de equipos
     path('lista_recomendaciones/', lista_recomendaciones, name = 'Lista Recomendaciones'), #lista de recomendaciones
+    path('resultados/<int:pk>', views.resultados_completos, name='Resultados'), # visor de resultados de pliegos
+    #path('resultados/<int:pk>', resultados, name = 'Resultados')
+    #path('etiqueta_resultado/<int:pk>', etiqueta_resultado, name = 'Etiqueta Resultado')
 ]

@@ -29,9 +29,9 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'GEV',
+        'NAME': 'MCE',
         'USER': 'postgres',
-        'PASSWORD': 'FB.Energia2024',
+        'PASSWORD': 'FB.Energia2022',
         'HOST': '127.0.0.1',
         'DATABASE_PORT': '5432',
     }

@@ -4,6 +4,7 @@ from apps.f_aux.geo_data import getGeoData, llamado
 #librerias adicionales
 import pandas as pd
 import numpy as np
+import math
 
 #para lista de recomendaciones
 class RecomendacionesSerializer(serializers.ModelSerializer):
@@ -703,38 +704,64 @@ class resultadosSerializer(serializers.ModelSerializer):
             'len': sum(instance['consumo_len']),
             'pel': sum(instance['consumo_pel'])
         }
-        '''
-        energia_perfil = {
-            'elec': [],
-            'gn': [],
-            'glp': [],
-            'ker': [],
-            'len': [],
-            'pel': []
+
+        #calculo demandas maximas para etiqueta
+        id_comuna = instance['id_comuna']
+        zt = instance['zt']
+        zt_2007 = comunas_zt.objects.filter(id_comuna=id_comuna, zt=zt).values_list('zt_2007',flat=True)[0]
+
+        #recorrido para binarios de energeticos
+        energia_bol = {clave: valor > 0 for clave, valor in energia_perfil.items()}
+        dda_maxima_elec = sum(list(perfilConsumoTipo.objects.filter(zt_2007=zt_2007).values_list('consumo_elec', flat=True)))
+        dda_maxima_gn = sum(list(perfilConsumoTipo.objects.filter(zt_2007=zt_2007).values_list('consumo_gn', flat=True)))
+        dda_maxima_glp = sum(list(perfilConsumoTipo.objects.filter(zt_2007=zt_2007).values_list('consumo_glp', flat=True)))
+        dda_maxima_ker = sum(list(perfilConsumoTipo.objects.filter(zt_2007=zt_2007).values_list('consumo_ker', flat=True)))
+        dda_maxima_len = sum(list(perfilConsumoTipo.objects.filter(zt_2007=zt_2007).values_list('consumo_len', flat=True)))
+        dda_maxima_pel = sum(list(perfilConsumoTipo.objects.filter(zt_2007=zt_2007).values_list('consumo_pel', flat=True)))
+        dda_maxima = {
+            'elec': dda_maxima_elec,
+            'gn': dda_maxima_gn,
+            'glp': dda_maxima_glp,
+            'ker': dda_maxima_ker,
+            'len': dda_maxima_len,
+            'pel': dda_maxima_pel
         }
-        horas_mes = [0, 744, 1416, 2160, 2880, 3624, 4344, 5088, 5832, 6552, 7296, 8016, 8760]
-        for i in range(12):
-            energia_perfil['elec'].append(sum(instance['consumo_elec'][horas_mes[i]:horas_mes[i+1]]))
-            energia_perfil['gn'].append(sum(instance['consumo_gn'][horas_mes[i]:horas_mes[i+1]]))
-            energia_perfil['glp'].append(sum(instance['consumo_glp'][horas_mes[i]:horas_mes[i+1]]))
-            energia_perfil['ker'].append(sum(instance['consumo_ker'][horas_mes[i]:horas_mes[i+1]]))
-            energia_perfil['len'].append(sum(instance['consumo_len'][horas_mes[i]:horas_mes[i+1]]))
-            energia_perfil['pel'].append(sum(instance['consumo_pel'][horas_mes[i]:horas_mes[i+1]]))
-        '''
+        dda_maxima_total = 0
+        for clave in energia_bol:
+            dda_maxima_total += energia_bol[clave] * dda_maxima[clave]
+        
         #Medidas seleccionadas
         medidas_dict = {}
         id_medidas = instance['recomendaciones_id']
 
         for medida in id_medidas:
             medidas_dict[medida] = recomendaciones.objects.filter(id=medida).values()
-        
+        #FIX: AGREGAR ORDEN POR INVERSIÓN Y EE
         #datos de resultados de medidas seleccionadas //VALORES A RESOLVER AUN
         resultado_medidas = {
             'eficiencia_energética': [12, 35],
             'Ahorro anual potencial de Energía': [4500, 15500],
             'Emisiones anuales evitadas estimadas': [1, 4]
         }
+        # puntajes por grupo uso:
+        id_equipos_seleccionados = list(instance['equipos_seleccionados'].keys())
+        resumen_desempeno = {}
+        for equipo_id in id_equipos_seleccionados:
+            equipo_data = instance['equipos_seleccionados'][equipo_id]
+            grupo = equipo_data['grupo_uso_corto']
+            energia = equipo_data['promedio_energia_anual']
 
+            if grupo not in resumen_desempeno:
+                resumen_desempeno[grupo] = {'cantidad_elementos': 0, 'suma_energia': 0, 'puntaje': 0} # Initialize count and energy sum
+
+            resumen_desempeno[grupo]['cantidad_elementos'] += 1
+            resumen_desempeno[grupo]['suma_energia'] += energia
+        
+        suma_desempeno = sum(resumen_desempeno[grupo]['suma_energia'] for grupo in resumen_desempeno)
+        
+        for grupo in resumen_desempeno:
+            resumen_desempeno[grupo]['puntaje'] = math.ceil(resumen_desempeno[grupo]['suma_energia']/(suma_desempeno) * 5)
+        
         resultados = {
             'id' : instance['id'],
             'id_comuna' : instance['id_comuna'],
@@ -745,8 +772,10 @@ class resultadosSerializer(serializers.ModelSerializer):
             'superficie' : instance['superficie'],
             'dormitorios' : instance['dormitorios'],
             'anio_construccion' : instance['anio_construccion'],
+            'dda_maxima': dda_maxima_total,
             'Resumen de consumos' : energia_perfil,
             'Costo_consumo_anual' : costo_perfil,
+            'Resumen_desempeno' : resumen_desempeno,
             'Medidas seleccionadas': medidas_dict,
             'Resultados medidas': resultado_medidas
         }

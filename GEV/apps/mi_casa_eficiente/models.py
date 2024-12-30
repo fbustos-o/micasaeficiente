@@ -65,6 +65,7 @@ class CostoEnergetico(models.Model):
 # 4 - equipos base de la vivienda
 class equipos(models.Model):
     nombre_equipo = models.CharField(max_length=150,blank=True,null=True)
+    grupo_uso_corto = models.CharField(max_length=150,blank=True,null=True)
     espacio_exterior = models.BooleanField('Exterior', blank=True,null=True)
     espacio_cocina = models.BooleanField('Cocina', blank=True,null=True)
     espacio_bahno = models.BooleanField('Baño', blank=True,null=True)
@@ -96,6 +97,7 @@ class energeticosFenomeno(models.Model):
 class recomendaciones(models.Model):
     grupo_uso_id = models.IntegerField(blank=True, null=True)
     grupo_uso = models.CharField(max_length=100, blank=True, null=True)
+    grupo_uso_corto = models.CharField(max_length=100, blank=True, null=True)
     recomendacion = models.TextField(blank=True, null=True)
     inversion_id = models.IntegerField(blank=True, null=True)
     inversion = models.CharField(max_length=100, blank=True, null=True)
