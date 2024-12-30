@@ -925,6 +925,13 @@ Ejemplo:
 {
 	"recomendaciones_id": [16, 15, 13, 1, 5, 3, 20]
 }
+
+2do Ejemplo (con mas consejos seleccionados):
+
+{
+	"recomendaciones_id": [1, 5, 3, 6, 22, 23, 9, 12, 16, 19, 27]
+}
+
 ```
 
 ### Paso 5: Resultados finales.
