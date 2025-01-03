@@ -12,19 +12,30 @@ def consulta_comunas(request):
     if request.method == 'GET':
         try:
             # Obtener todas las regiones únicas
-            regiones = comunas_zt.objects.order_by('id').values("region").distinct()
-            #diccionario base
-            comunas_por_region = {}
+            regiones = comunas_zt.objects.order_by('id').values("region", "id_regional").distinct()
+            # Convertir el QuerySet a una lista de diccionarios
+            regiones_lista = list(regiones)
+            # Eliminar duplicados usando un set (convierte la lista a set y luego de vuelta a lista)
+            regiones_sin_duplicados = list({v['region']:v for v in regiones_lista}.values())
+            # Lista para almacenar las regiones con sus comunas
+            regiones_con_comunas = []
             # Iterar sobre las regiones
-            for region in regiones:
+            for region in regiones_sin_duplicados:
                 nombre_region = region['region']
-                # Obtener las comunas únicas para la región actual
-                comunas = comunas_zt.objects.filter(region=nombre_region).values_list('comuna', 'id_comuna', 'clima').distinct()
-                # Agregar la región y sus comunas al diccionario
-                comunas_por_region[nombre_region] = {
+                id_region = region['id_regional']  # Obtener el id_region directamente
+
+                # Obtener las comunas únicas para la región actual, ordenadas por nombre
+                comunas = comunas_zt.objects.filter(region=nombre_region).order_by('comuna').values_list('comuna', 'id_comuna', 'clima').distinct()
+                
+                # Crear diccionario con la información de la región y sus comunas
+                region_data = {
+                    'nombre': nombre_region,
+                    'id_region': id_region,
                     'comunas': list(comunas)
                 }
-            response = comunas_por_region
+                # Agregar la región a la lista
+                regiones_con_comunas.append(region_data)
+            response = {'regiones': regiones_con_comunas}
             status_code = status.HTTP_200_OK
         except Exception as e:
             response = str(e)
