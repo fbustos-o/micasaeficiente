@@ -1,46 +1,180 @@
-﻿id;nombre_equipo;grupo_uso_corto;espacio_exterior ;espacio_cocina;espacio_banho;espacio_dormitorio;espacio_living;descripcion;energia_base_id;grupo_uso_id;cantidad_promedio;horas_uso_tipo;potencia_equipo;eficiencia_equipo;promedio_energia_anual;fuente
-1;Ampolleta LED;Iluminación;0;1;1;1;1;vida util: 15000 horas;6;1;13;15.8;13;1;146.19345;
-2;Ampolleta Halógena;Iluminación;0;1;1;1;1;vida util: 2000 horas;6;1;13;15.8;80;1;899.652;
-3;Ampolleta LFC;Iluminación;0;1;1;1;1;vida util: 10000 horas;6;1;13;15.8;20;1;224.913;
-4;Hervidor de agua;Electrodomésticos;0;1;0;0;0;uso de 10 minutos al día;6;4;1;0.145205479;2000;1;106;
-5;Microondas;Cocina;0;1;0;0;0;uso de 5 minutos al día;6;4;1;0.060273973;1500;1;33;
-6;Secador de Pelo;Electrodomésticos;0;0;1;0;0;;6;5;1;0.054794521;1500;1;30;
-7;Plancha;Electrodomésticos;0;0;0;1;1;;6;5;1;0.175342466;1000;1;64;
-8;Lavadora;Electrodomésticos;0;1;1;0;0;;6;5;1;0.365296804;330;1;44;
-9;Televisor;Electrodomésticos;0;1;0;1;1;;6;5;2;9.506849315;100;1;347;
-10;Computador;Electrodomésticos;0;0;0;1;1;;6;5;2;3.6;90;1;67;
-11;Aire Acondicionado - frio;Enfriamiento;0;1;0;1;1;;6;6;1;0.249066002;1100;3;300;
-12;Aire Acondicionado - calor;Calefacción;0;1;0;1;1;;6;3;1;0.523038605;1100;3;630;
-13;Termoventilador;Calefacción;0;1;1;1;1;;6;3;1;0.52;2000;1;379.6;
-14;Cocina Electrica;Cocina;0;1;0;0;0;;6;4;1;0.112876712;5000;1;206;
-15;Horno electrico;Cocina;0;1;0;0;0;;6;4;1;0.091324201;3000;1;100;
-16;Cocina a gas licuado;Cocina;0;1;0;0;0;;1;4;1;0.078386606;12000;0.6;206;
-17;Horno a gas licuado;Cocina;0;1;0;0;0;;1;4;1;0.182648402;2500;0.6;100;
-18;Cocina a gas natural;Cocina;0;1;0;0;0;;2;4;1;0.078386606;12000;0.6;206;
-19;Horno a gas natural;Cocina;0;1;0;0;0;;2;4;1;0.182648402;2500;0.6;100;
-20;Refrigerador;Electrodomésticos;0;1;0;0;0;;6;4;1;24;50;1;403;
-21;Estufa Gas Licuado;Calefacción;0;1;0;1;1;;1;3;1;0.52;4500;0.7;1220.142857;
-22;Estufa Gas Natural;Calefacción;0;1;0;1;1;;2;3;1;0.52;4500;0.7;1220.142857;
-23;Estufa Parafina;Calefacción;0;1;0;1;1;;3;3;1;0.52;3000;0.85;669.8823529;
-24;Estufa Pellet;Calefacción;0;0;0;0;1;;4;3;1;0.52;7500;0.9;1581.666667;
-25;Estufa Leña;Calefacción;0;1;0;1;1;;5;3;1;0.52;7000;0.7;1898;
-26;Aspiradora;Electrodomésticos;0;1;1;1;1;;6;5;1;0.269863014;2000;1;197;
-27;Consola de Juegos;Electrodomésticos;0;0;0;1;1;;6;5;1;0.273972603;120;1;12;
-28;Cargador Celular;Electrodomésticos;0;1;1;1;1;;6;5;1;3;5;1;5.475;
-29;Ventilador;Enfriamiento;0;1;0;1;1;;6;6;1;0.52;55;1;10.439;
-30;Equipo Musical;Electrodomésticos;0;1;0;1;1;;6;5;1;8.5;50;1;155.125;
-31;Secadora ropa;Electrodomésticos;0;1;1;0;0;;6;5;1;3.6;2000;1;431;
-32;Licuadora;Electrodomésticos;0;1;0;0;0;;6;5;1;0;550;1;0;
-33;Alisador de pelo;Electrodomésticos;0;0;1;1;0;;6;5;1;0;42;1;0;
-34;Impresora;Electrodomésticos;0;0;0;1;1;;6;5;1;0;;1;0;
-35;Afeitadora;Electrodomésticos;0;0;1;0;0;;6;5;1;0;;1;0;
-36;Taladro eléctrico;Electrodomésticos;0;1;0;0;1;;6;5;1;0;550;1;0;
-37;Campana de extracción;Cocina;0;1;0;0;0;;6;4;1;0;120;1;0;
-38;Congelador;Electrodomésticos;0;1;0;0;1;;6;5;1;24;25;1;230;
-39;Frazada eléctrica;Electrodomésticos;0;0;0;1;0;;6;5;1;0.5;100;1;18.25;
-40;Cafereta eléctrica;Electrodomésticos;0;1;0;0;1;;6;5;1;0.191780822;800;1;56;
-41;Lava vajilla;Electrodomésticos;0;1;0;0;0;;6;5;1;1;2000;1;65.7;
-42;Calefont a GLP;Agua Caliente;1;1;0;0;0;;1;2;1;0.33314878;17700;0.65;1399;
-43;Calefont GN;Agua Caliente;1;1;0;0;0;;2;2;1;0.309352438;17700;0.7;1399;
-44;Termo electrico;Agua Caliente;1;1;1;0;0;;6;2;1;1.533150685;2500;1;1399;
-45;Bomba de calor ACS;Agua Caliente;1;0;0;0;0;;6;2;1;1.161477792;1100;3;1399;
+﻿id;nombre_equipo;grupo_uso_corto;espacio_exterior ;espacio_cocina;espacio_banho;espacio_dormitorio;espacio_living;descripcion;energia_base_id;grupo_uso_id;cantidad_promedio;horas_uso_tipo;potencia_equipo;eficiencia_equipo;promedio_energia_anual;fuente;etiqueta;subtitulo
+1;Ampolleta LED;Iluminación;0;1;1;1;1;"1.- Reemplazar luminarias existentes por tecnología LED. Las luminarias LED se caracterizan por un menor consumo energético y una vida útil significativamente más prolongada en comparación con las lámparas fluorescentes tradicionales. En este sentido. se recomienda la conversión a tecnología LED para optimizar el rendimiento lumínico y reducir el impacto ambiental.
+
+DATO: Las ampolletas LED pueden tener 15000 horas de vida útil y el menor consumo comparado. pudiendo ahorrar hasta un 87% respecto a la incandescentes.
+
+2.- Instalar sensores de luz natural para control de iluminación interior. Instalar controladores de iluminación mediante fotoceldas (automatizan el encendido y apagado en función de la iluminación natural con la que cuente el recinto). Este control permite reducir el tiempo de encendido de la luz artificial. cuando la luz natural es capaz de iluminar adecuadamente el espacio. Las metodologías de control se pueden aplicar a cualquier espacio de un edificio con luz natural. Las luces pueden ser ajustadas de forma gradual o bien encendido o apagado.
+
+3.- Instalar sistemas de sensor de detección de movimientos. Estos sensores detectan movimiento. con el cual automáticamente encienden las luces. mantienen encendida la iluminación mientras se encuentra el espacio ocupado. y las apagan cuando el recinto queda sin ocupantes.";6;1;13;15.8;13;1;146.19345;;1;16% del consumo eléctrico en los hogares corresponde a iluminación.Una vivienda en el país posee en promedio. 13.2 luminarias y se utilizan en promedio por 15.8 horas diarias. con al menos una ampolleta encendida
+2;Ampolleta Halógena;Iluminación;0;1;1;1;1;"1.- Reemplazar luminarias existentes por tecnología LED. Las luminarias LED se caracterizan por un menor consumo energético y una vida útil significativamente más prolongada en comparación con las lámparas fluorescentes tradicionales. En este sentido. se recomienda la conversión a tecnología LED para optimizar el rendimiento lumínico y reducir el impacto ambiental.
+
+DATO: Las ampolletas LED pueden tener 15000 horas de vida útil y el menor consumo comparado. pudiendo ahorrar hasta un 87% respecto a la incandescentes.
+
+2.- Instalar sensores de luz natural para control de iluminación interior. Instalar controladores de iluminación mediante fotoceldas (automatizan el encendido y apagado en función de la iluminación natural con la que cuente el recinto). Este control permite reducir el tiempo de encendido de la luz artificial. cuando la luz natural es capaz de iluminar adecuadamente el espacio. Las metodologías de control se pueden aplicar a cualquier espacio de un edificio con luz natural. Las luces pueden ser ajustadas de forma gradual o bien encendido o apagado.
+
+3.- Instalar sistemas de sensor de detección de movimientos. Estos sensores detectan movimiento. con el cual automáticamente encienden las luces. mantienen encendida la iluminación mientras se encuentra el espacio ocupado. y las apagan cuando el recinto queda sin ocupantes.";6;1;13;15.8;80;1;899.652;;1;16% del consumo eléctrico en los hogares corresponde a iluminación.Una vivienda en el país posee en promedio. 13.2 luminarias y se utilizan en promedio por 15.8 horas diarias. con al menos una ampolleta encendida
+3;Ampolleta LFC;Iluminación;0;1;1;1;1;"1.- Reemplazar luminarias existentes por tecnología LED. Las luminarias LED se caracterizan por un menor consumo energético y una vida útil significativamente más prolongada en comparación con las lámparas fluorescentes tradicionales. En este sentido. se recomienda la conversión a tecnología LED para optimizar el rendimiento lumínico y reducir el impacto ambiental.
+
+DATO: Las ampolletas LED pueden tener 15000 horas de vida útil y el menor consumo comparado. pudiendo ahorrar hasta un 87% respecto a la incandescentes.
+
+2.- Instalar sensores de luz natural para control de iluminación interior. Instalar controladores de iluminación mediante fotoceldas (automatizan el encendido y apagado en función de la iluminación natural con la que cuente el recinto). Este control permite reducir el tiempo de encendido de la luz artificial. cuando la luz natural es capaz de iluminar adecuadamente el espacio. Las metodologías de control se pueden aplicar a cualquier espacio de un edificio con luz natural. Las luces pueden ser ajustadas de forma gradual o bien encendido o apagado.
+
+3.- Instalar sistemas de sensor de detección de movimientos. Estos sensores detectan movimiento. con el cual automáticamente encienden las luces. mantienen encendida la iluminación mientras se encuentra el espacio ocupado. y las apagan cuando el recinto queda sin ocupantes.";6;1;13;15.8;20;1;224.913;;1;16% del consumo eléctrico en los hogares corresponde a iluminación.Una vivienda en el país posee en promedio. 13.2 luminarias y se utilizan en promedio por 15.8 horas diarias. con al menos una ampolleta encendida
+4;Hervidor de agua;Electrodomésticos;0;1;0;0;0;"1.- Usar termo para almacenar el agua caliente. De esta formase evita usar el hervidor de aguas varias veces al dia.
+2.- Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ";6;4;1;0.145205479;2000;1;106;;0;El 4% del consumo eléctrico de los hogares es atribuible al uso de hervidores de agua
+5;Microondas;Cocina;0;1;0;0;0;"1.- Preferir artefactos con etiqueta de eficiencia energética. ​
+2.- Elimine o desenchufe el artefacto no utilizado y reemplace el equipo antiguo por una versión más eficiente energéticamente. con el fin de reducir la densidad de potencia de carga por enchufe
+3.- Elija la capacidad en función de su situación: uno de 20L es perfecto para parejas o solteros. mientras que uno de 40L es más cómodo para un uso familiar: un microondas de gran capacidad permite calentar varios alimentos simultáneamente.
+4.- Es mucho más económico calentar un plato en el microondas que en el horno o en tu placa eléctrica. Si quieres calentar algo más grande. ocurre lo contrario: a un microondas le costará mucho más penetrar hasta el corazón del alimento para calentarlo. mientras que el calor de un horno lo alcanzará más fácilmente.
+5.- Limpia el microondas con regularidad para eliminar los restos de comida";6;4;1;0.060273973;1500;1;33;;1;El 1% del consumo eléctrico de los hogares es atribuible al uso de microondas
+6;Secador de Pelo;Electrodomésticos;0;0;1;0;0;Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ;6;5;1;0.054794521;1500;1;30;;1;
+7;Plancha;Electrodomésticos;0;0;0;1;1;"1.- Preferir planchar cuando se acumulen varias prendas.
+2.- Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ";6;5;1;0.175342466;1000;1;64;;0;La plancha es uno de los electrodomésticos con mayor potencia.
+8;Lavadora;Electrodomésticos;0;1;1;0;0;"1.- Use su máquina sólo cuando esté llena. 
+2.- Lavar a baja temperatura si es posible (20-30°C). De esta forma proteges tanto el medio ambiente como tu ropa. 
+3.- No es necesario el prelavado.
+4.- Selecciona el programa económico. aunque dure más. El programa rápido consume mucha más electricidad y agua.
+5.- No aumente la dosis de detergente para ropa a bajas temperaturas. la ropa no quedará más limpia.
+6.- Limpia periódicamente el cajón de la lavadora. así como los filtros y la junta del tambor. Esto extiende la vida útil de su máquina.";6;5;1;0.365296804;330;1;44;;1;El 1.6% del consumo eléctrico de los hogares es atribuible al uso delavadoras de ropa
+9;Televisor;Electrodomésticos;0;1;0;1;1;"1.- Apague siempre su televisor por completo. La forma más sencilla es utilizar un interruptor de apagado o una regleta.
+2.- Atenúe las luces de la habitación y reduzca el brillo de la pantalla.  Si se activa la función de ajuste automático del brillo de la pantalla a la luz ambiental. este equilibrio se realizará de forma automática.
+3.- Desactive la función HDR (alto rango dinámico). Esta función acentúa los colores y los contrastes. Puede aumentar el consumo de electricidad en un 70% (CH).
+4.- Apague la pantalla cuando escuche música a través de su televisor.";6;5;2;9.506849315;100;1;347;;1;El 16.3% del consumo eléctrico de los hogares es atribuible al uso de televisores. Apague completamente los dispositivos conectados a Internet o a la red WLAN. como módems. enrutadores. decodificadores de TV. televisores. impresoras y otros dispositivos inteligentes. Incluso en modo de espera. consumen mucha más energía que los dispositivos desconectados.
+10;Computador;Electrodomésticos;0;0;0;1;1;"1.- Tómese el tiempo para familiarizarse con las funciones de sus dispositivos y habilite la configuración de ahorro de energía.
+2.- Conecte todos sus dispositivos electrónicos de ocio (televisión. decodificador. DVD. sistema HiFi. videoconsola) en el mismo alargador equipado con un interruptor. Cuando no los estés usando. puedes apagarlos todos a la vez.p. ex. durante la noche o de vacaciones.
+3.- Instale un alargador inteligente que pueda controlar y programar de forma remota a través de una aplicación. Este último también permite ver el consumo de los dispositivos conectados a la regleta.
+4.- Equipe su estación de trabajo con la menor cantidad de pantallas posible. En un sistema informático. estos dispositivos consumen mucha energía.
+5.- El consumo energético de una pantalla depende principalmente de su brillo. A menudo resulta útil reducir un poco el brillo de la pantalla y la iluminación de la habitación.
+6.- Habilite las opciones de ahorro de energía. modo de suspensión o programación horaria que coincidan con sus hábitos de uso. Recuerda también desactivar funciones innecesarias.";6;5;2;3.6;90;1;67;;0;"Las tabletas y los teléfonos inteligentes consumen 10 veces menos electricidad que los portátiles. 
+Una computadora portátil consume de tres a cuatro veces menos electricidad que una computadora de escritorio."
+11;Aire Acondicionado - frio;Enfriamiento;0;1;0;1;1;"1.- En verano. baje la temperatura ambiente a 22-24 grados. Cuanto más frío estés. más aumentará el consumo de energía. Bastará con bajar 2 a 4 ghrados de la temperatura ambiente para setir confortable el ambiente. 
+2.- Cierre todas las ventanas cuando el aire acondicionado esté funcionando.
+3.- No climatizar habitaciones no utilizadas.
+4.- Asegúrese de que el aire pueda circular libremente.
+5.- Limpiar periódicamente los filtros y evaporadores y drenar el agua de condensación.
+6.- Enfríe su hogar con acciones simples en lugar de un aire acondicionado: desenchufe todos los electrodomésticos que no utilice y apague las lámparas. 
+7.- Tapa el acceso del sol con cortinas tipo ""Blackout""cuando el sol calienta la fachada. 
+8.- No abra la ventana cuando ya haga calor y. idealmente. ventile sólo temprano en la mañana. antes del amanecer.";6;6;1;0.249066002;1100;3;300;;1;"Los equipos de Aire Acondicionado móviles son mucho menos eficientes que los sistemas fijos tipo ""split""."
+12;Aire Acondicionado - calor;Calefacción;0;1;0;1;1;"1.- En invierno. ajuste el termostato del equipo entre 18-22 grados. Cuanto más calefaccionado estes estés. más aumentará el consumo de energía. Cada grado de aumento sube aproximadamente un 7% la cuenta de energía electrica. 
+2.- Cierre todas las ventanas cuando el aire acondicionado esté funcionando.
+3.- No climatizar espacios no utilizados de la casa.
+4.- Asegúrese de que el aire pueda circular libremente por los espacios que se quiere climatizar.
+5.-Recuerda limpiar periódicamente los filtros y evaporadores y drenar el agua de condensación.";6;3;1;0.523038605;1100;3;630;;1;"Los equipos de Aire Acondicionado móviles son mucho menos eficientes que los sistemas fijos tipo ""split""."
+13;Termoventilador;Calefacción;0;1;1;1;1;"1.- En invierno. ajuste el termostato del equipo entre 18-22 grados. Cuanto más calefaccionado estes estés. más aumentará el consumo de energía. Cada grado de aumento sube aproximadamente un 7% la cuenta de energía electrica. 
+2.- Cierre todas las ventanas cuando el aire acondicionado esté funcionando.
+3.- No climatizar espacios no utilizados de la casa.
+4.- Asegúrese de que el aire pueda circular libremente por los espacios que se quiere climatizar.";6;3;1;0.52;2000;1;379.6;;0;El 4.4% del consumo de electricidad de los hogares es atribuible calefacción. Los termoventiladores son efectivos para usos cortos y en espacios muy pequeños (no mas de 9 metros cuadrados).
+14;Cocina Electrica;Cocina;0;1;0;0;0;"1.- Tapar las cacerolas cuando se cocina: esto ayuda a que los alimentos se cocinen más rápidamente.
+2.- Un buen mantenimiento de sus equipos es una forma eficaz de mejorar su rendimiento y prolongar su vida útil
+3.- Una de las formas más sencillas de reducir el consumo de energía en la cocina es utilizar una cacerola del tamaño adecuado. Cuando se utiliza una cacerola demasiado grande para la cantidad de alimentos que se van a cocinar. gran parte del calor se disipa en el aire en lugar de transferirse eficazmente a los alimentos.";6;4;1;0.112876712;5000;1;206;;1;
+15;Horno electrico;Cocina;0;1;0;0;0;"1.- Prepare varios platos simultáneamente para utilizar todo el volumen del horno. Los aromas no se mezclan.
+2.- Olvídese del precalentamiento para ahorrar un 20% de energía. Sólo unos pocos platos. como los soufflés. funcionan mejor en un horno precalentado. Ahorre aún más energía utilizando la función de calor del ventilador en lugar del calor superior o inferior.
+3.- Abra la puerta del horno sólo cuando sea absolutamente necesario.
+4.- Apagar el horno cinco minutos antes de finalizar la cocción para aprovechar el calor residual.";6;4;1;0.091324201;3000;1;100;;1;
+16;Cocina a gas licuado;Cocina;0;1;0;0;0;"1.- Tapar las cacerolas cuando se cocina: esto ayuda a que los alimentos se cocinen más rápidamente.
+2.- Un buen mantenimiento de sus equipos es una forma eficaz de mejorar su rendimiento y prolongar su vida útil
+3.- Una de las formas más sencillas de reducir el consumo de energía en la cocina es utilizar una cacerola del tamaño adecuado. Cuando se utiliza una cacerola demasiado grande para la cantidad de alimentos que se van a cocinar. gran parte del calor se disipa en el aire en lugar de transferirse eficazmente a los alimentos.";1;4;1;0.078386606;12000;0.6;206;;0;El 12% del consumo de GN/GLP de los hogares es atribuible a la cocción de los alimentos (horno y cocina).
+17;Horno a gas licuado;Cocina;0;1;0;0;0;"1.- Prepare varios platos simultáneamente para utilizar todo el volumen del horno. Los aromas no se mezclan.
+2.- Olvídese del precalentamiento para ahorrar un 20% de energía. Sólo unos pocos platos. como los soufflés. funcionan mejor en un horno precalentado. Ahorre aún más energía utilizando la función de calor del ventilador en lugar del calor superior o inferior.
+3.- Abra la puerta del horno sólo cuando sea absolutamente necesario.
+4.- Apagar el horno cinco minutos antes de finalizar la cocción para aprovechar el calor residual.";1;4;1;0.182648402;2500;0.6;100;;0;El 12% del consumo de GN/GLP de los hogares es atribuible a la cocción de los alimentos (horno y cocina).
+18;Cocina a gas natural;Cocina;0;1;0;0;0;"1.- Tapar las cacerolas cuando se cocina: esto ayuda a que los alimentos se cocinen más rápidamente.
+2.- Un buen mantenimiento de sus equipos es una forma eficaz de mejorar su rendimiento y prolongar su vida útil
+3.- Una de las formas más sencillas de reducir el consumo de energía en la cocina es utilizar una cacerola del tamaño adecuado. Cuando se utiliza una cacerola demasiado grande para la cantidad de alimentos que se van a cocinar. gran parte del calor se disipa en el aire en lugar de transferirse eficazmente a los alimentos.";2;4;1;0.078386606;12000;0.6;206;;0;El 12% del consumo de GN/GLP de los hogares es atribuible a la cocción de los alimentos (horno y cocina).
+19;Horno a gas natural;Cocina;0;1;0;0;0;"1.- Prepare varios platos simultáneamente para utilizar todo el volumen del horno. Los aromas no se mezclan.
+2.- Olvídese del precalentamiento para ahorrar un 20% de energía. Sólo unos pocos platos. como los soufflés. funcionan mejor en un horno precalentado. Ahorre aún más energía utilizando la función de calor del ventilador en lugar del calor superior o inferior.
+3.- Abra la puerta del horno sólo cuando sea absolutamente necesario.
+4.- Apagar el horno cinco minutos antes de finalizar la cocción para aprovechar el calor residual.";2;4;1;0.182648402;2500;0.6;100;;0;El 12% del consumo de GN/GLP de los hogares es atribuible a la cocción de los alimentos (horno y cocina).
+20;Refrigerador;Electrodomésticos;0;1;0;0;0;"1.- Coloque su congelador en la habitación más fresca porque el consumo de electricidad depende principalmente de la temperatura ambiente. Deje suficiente espacio en la parte posterior del dispositivo para garantizar la disipación de calor del compresor y las aletas de refrigeración.
+2.- Deje que los alimentos calientes se enfríen antes de colocarlos en el refrigerador o congelador.
+3.- Ajusta la temperatura de tu frigorífico a 7°C. Para un congelador. -15°C es suficiente.
+4.- Coloque los alimentos a descongelar en su frigorífico. Esto ayuda a enfriar el interior del dispositivo.
+5.- Limpie los sellos de las puertas con regularidad. Las puertas con goteras provocan pérdida de energía.
+6.- No coloque el refrigerador (ni ningún otro aparato de refrigeración) cerca de fuentes de calor en su cocina. ";6;4;1;24;50;1;403;;1;Los refrigeradores y congeladores están presentes en todos los hogares y consumen energía las 24 horas del día. por lo que es necesario asegurar su eficiencia energética a la hora de adquirirlos. 5% del consumo energético en los hogares corresponde a refrigeración de alimentos (refrigerador y freezer). 
+21;Estufa Gas Licuado;Calefacción;0;1;0;1;1;"1.- En invierno. ajuste el termostato del equipo entre 18-22 grados. Cuanto más calefaccionado estes estés. más aumentará el consumo de energía. Cada grado de aumento sube aproximadamente un 7% la cuenta de energía electrica. 
+2.- Mantenga ventilado para equipos de combustión.
+3.- No climatizar espacios no utilizados de la casa.
+4.- Asegúrese de que el aire pueda circular libremente por los espacios que se quiere climatizar.
+5.-Recuerda limpiar periódicamente las regillas y revise el estado de la manguera de gas. ";1;3;1;0.52;4500;0.7;1220.142857;;0;El 24 % del consumo de GN/GLP de los hogares es atribuible a calefacción. DATO: Una mayor aislación mejora considerablemente el confort térmico interior y y el gasto en climatización.
+22;Estufa Gas Natural;Calefacción;0;1;0;1;1;"1.- En invierno. ajuste el termostato del equipo entre 18-22 grados. Cuanto más calefaccionado estes estés. más aumentará el consumo de energía. Cada grado de aumento sube aproximadamente un 7% la cuenta de energía electrica. 
+2.- Mantenga ventilado para equipos de combustión.
+3.- No climatizar espacios no utilizados de la casa.
+4.- Asegúrese de que el aire pueda circular libremente por los espacios que se quiere climatizar.
+5.-Recuerda limpiar periódicamente las regillas y revise el estado de la manguera de gas. ";2;3;1;0.52;4500;0.7;1220.142857;;0;El 24 % del consumo de GN/GLP de los hogares es atribuible a calefacción. DATO: Una mayor aislación mejora considerablemente el confort térmico interior y y el gasto en climatización.
+23;Estufa Parafina;Calefacción;0;1;0;1;1;"1.- En invierno. ajuste el termostato del equipo entre 18-22 grados. Cuanto más calefaccionado estes estés. más aumentará el consumo de energía. Cada grado de aumento sube aproximadamente un 7% la cuenta de energía electrica. 
+2.- Mantenga ventilado para equipos de combustión.
+3.- No climatizar espacios no utilizados de la casa.
+4.- Asegúrese de que el aire pueda circular libremente por los espacios que se quiere climatizar.
+5.-Recuerda limpiar periódicamente las regillas";3;3;1;0.52;3000;0.85;669.8823529;;0;"53% del consumo total de energía en los hogares corresonden a calefacción y climatización. 
+DATO: Una mayor aislación mejora considerablemente el confort térmico interior y y el gasto en climatización"
+24;Estufa Pellet;Calefacción;0;0;0;0;1;"1.- En invierno. ajuste el termostato del equipo entre 18-22 grados. Cuanto más calefaccionado estes estés. más aumentará el consumo de energía. Cada grado de aumento sube aproximadamente un 7% la cuenta de energía electrica. 
+2.- Mantenga ventilado para equipos de combustión.
+3.- No climatizar espacios no utilizados de la casa.
+4.- Asegúrese de que el aire pueda circular libremente por los espacios que se quiere climatizar.
+5.-Recuerda limpiar periódicamente la camara de combustión. antes de iniciar un nuevo encendido es bueno retirar el hollín. ";4;3;1;0.52;7500;0.9;1581.666667;;1;"53% del consumo total de energía en los hogares corresonden a calefacción y climatización. 
+DATO: Una mayor aislación mejora considerablemente el confort térmico interior y y el gasto en climatización"
+25;Estufa Leña;Calefacción;0;1;0;1;1;"1.- En invierno. ajuste el termostato del equipo entre 18-22 grados. Cuanto más calefaccionado estes estés. más aumentará el consumo de energía. Cada grado de aumento sube aproximadamente un 7% la cuenta de energía electrica. 
+2.- Mantenga ventilado para equipos de combustión.
+3.- No climatizar espacios no utilizados de la casa.
+4.- Asegúrese de que el aire pueda circular libremente por los espacios que se quiere climatizar.
+5.-Recuerda limpiar periódicamente la camara de combustión. antes de iniciar un nuevo encendido es bueno retirar el hollín. ";5;3;1;0.52;7000;0.7;1898;;1;"53% del consumo total de energía en los hogares corresonden a calefacción y climatización. 
+DATO: Una mayor aislación mejora considerablemente el confort térmico interior y y el gasto en climatización"
+26;Aspiradora;Electrodomésticos;0;1;1;1;1;Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC).;6;5;1;0.269863014;2000;1;197;;0;El 1% del consumo eléctrico de los hogares es atribuible al uso de la aspiradora.
+27;Consola de Juegos;Electrodomésticos;0;0;0;1;1;"1.- Tómese el tiempo para familiarizarse con las funciones de sus dispositivos y habilite la configuración de ahorro de energía.
+2.- Conecte todos sus dispositivos electrónicos de ocio (televisión. decodificador. DVD. sistema HiFi. videoconsola) en la misma regleta equipada con un interruptor. Cuando no los estés usando. puedes apagarlos todos a la vez.
+3.- Instale un alargador inteligente que pueda controlar y programar de forma remota a través de una aplicación. ";6;5;1;0.273972603;120;1;12;;0;Los videojuegos de alta resolución requieren mucha potencia en términos de hardware informático y tarjetas gráficas. Por tanto. no es raro que un ordenador para juegos consuma 300 Watt o más. Jugar dos horas al día en un ordenador de este tipo supone un consumo anual de electricidad de 220 kWh.
+28;Cargador Celular;Electrodomésticos;0;1;1;1;1;"Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). 
+Elimine o desenchufe el artefacto no utilizado y reemplace el equipo antiguo por una versión más eficiente energéticamente. con el fin de reducir la densidad de potencia de carga por enchufe (reducir un 25% desde la línea de base).
+Desconexión de equipos que no se estén usando. y reducir la cantidad de equipos privilegiando compartirlos.";6;5;1;3;5;1;5.475;;0;
+29;Ventilador;Enfriamiento;0;1;0;1;1;"1.- En verano. baje la temperatura ambiente a 22-24 grados. Cuanto más frío estés. más aumentará el consumo de energía. Bastará con bajar 2 a 4 ghrados de la temperatura ambiente para setir confortable el ambiente. 
+2.- Cierre todas las ventanas cuando el aire acondicionado esté funcionando.
+3.- No climatizar habitaciones no utilizadas.
+4.- Asegúrese de que el aire pueda circular libremente.
+5.- Limpiar periódicamente los filtros y evaporadores y drenar el agua de condensación.
+6.- Enfríe su hogar con acciones simples en lugar de un aire acondicionado: desenchufe todos los electrodomésticos que no utilice y apague las lámparas. 
+7.- Tapa el acceso del sol con cortinas tipo ""Blackout""cuando el sol calienta la fachada. 
+8.- No abra la ventana cuando ya haga calor y. idealmente. ventile sólo temprano en la mañana. antes del amanecer.";6;6;1;0.52;55;1;10.439;;0;DATO: Una mayor aislación mejora considerablemente el confort térmico interior y y el gasto en climatización
+30;Equipo Musical;Electrodomésticos;0;1;0;1;1;"1.- Tómese el tiempo para familiarizarse con las funciones de sus dispositivos y habilite la configuración de ahorro de energía.
+2.- Conecte todos sus dispositivos electrónicos de ocio (televisión. decodificador. DVD. sistema HiFi. videoconsola) en el mismo alargador equipado con un interruptor. Cuando no los estés usando. puedes apagarlos todos a la vez. Por ejemplo durante la noche o de vacaciones.
+3.- Instale un alargador inteligente que pueda controlar y programar de forma remota a través de una aplicación. ";6;5;1;8.5;50;1;155.125;;0;Apague completamente los dispositivos conectados a Internet o a la red WLAN. como módems. enrutadores. decodificadores de TV. televisores. impresoras y otros dispositivos inteligentes. Incluso en modo de espera. consumen mucha más energía que los dispositivos desconectados.
+31;Secadora ropa;Electrodomésticos;0;1;1;0;0;"1.- Seca tu ropa al aire. Ahorras energía y dinero. Si secas la ropa en tu casa. recuerda ventilar regularmente para evitar que se forme moho.
+2.- Llene siempre la secadora a su máxima capacidad.
+3.- Asegúrese de que la ropa esté bien escurrida antes de ponerla en la secadora.
+4.- Limpia el filtro después de cada uso y vacía el depósito de agua.
+5.- Seleccione el programa “listo para planchar” en lugar de “extra seco”.";6;5;1;3.6;2000;1;431;;0;"El  6.2% del consumo eléctrico de los hogares es atribuible al uso de secadora de ropa.
+La forma más respetuosa con el medio ambiente de secar la ropa es hacerlo al aire libre. Desafortunadamente. esto no siempre es posible. Un electrodoméstico energéticamente eficiente le permite ahorrar energía y reducir el presupuesto del hogar.Una lavadora y secadora separadas son más eficientes que un electrodoméstico combinado."
+32;Licuadora;Electrodomésticos;0;1;0;0;0;1.- Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ;6;5;1;0;550;1;0;;0;
+33;Alisador de pelo;Electrodomésticos;0;0;1;1;0;1.- Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ;6;5;1;0;42;1;0;;0;
+34;Impresora;Electrodomésticos;0;0;0;1;1;"1.- Tómese el tiempo para familiarizarse con las funciones de sus dispositivos y habilite la configuración de ahorro de energía.
+2.- Conecte todos sus dispositivos electrónicos de ocio (televisión. decodificador. DVD. sistema HiFi. videoconsola) en el mismo alargador equipado con un interruptor. Cuando no los estés usando. puedes apagarlos todos a la vez. Por ejemplo durante la noche o de vacaciones.
+3.- Instale un alargador inteligente que pueda controlar y programar de forma remota a través de una aplicación. ";6;5;1;0;;1;0;;1;Apague completamente los dispositivos conectados a Internet o a la red WLAN. como módems. enrutadores. decodificadores de TV. televisores. impresoras y otros dispositivos inteligentes. Incluso en modo de espera. consumen mucha más energía que los dispositivos desconectados.
+35;Afeitadora;Electrodomésticos;0;0;1;0;0;1.- Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ;6;5;1;0;;1;0;;0;
+36;Taladro eléctrico;Electrodomésticos;0;1;0;0;1;1.- Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ;6;5;1;0;550;1;0;;0;
+37;Campana de extracción;Cocina;0;1;0;0;0;"1.- Adaptar la velocidad de funcionamiento al tipo de cocción. Al estofar o freír. cambie a velocidad alta para garantizar una buena calidad del aire ambiente. Por el contrario. para cocinar verduras suele ser suficiente una velocidad más lenta.
+2.- Asegúrese de cocinar en ollas o sartenes tapadas. Además del ahorro energético resultante. también se reducen las emisiones de vapor de agua. grasa y olores al aire ambiente.
+3.- Limpie periódicamente el filtro de grasa de la campana.
+4.- En las campanas de recirculación. es importante sustituir periódicamente el filtro de olores. ¡Consulte las instrucciones del fabricante!";6;4;1;0;120;1;0;;0;
+38;Congelador;Electrodomésticos;0;1;0;0;1;"1.- Coloque su congelador en la habitación más fresca porque el consumo de electricidad depende principalmente de la temperatura ambiente. Deje suficiente espacio en la parte posterior del dispositivo para garantizar la disipación de calor del compresor y las aletas de refrigeración.
+2.- Deje que los alimentos calientes se enfríen antes de colocarlos en el refrigerador o congelador.
+3.- Ajusta la temperatura de tu congelador a -15°C es suficiente.
+4.- Limpie los sellos de las puertas con regularidad. Las puertas con goteras provocan pérdida de energía
+5.- No coloque el refrigerador (ni ningún otro aparato de refrigeración) cerca de fuentes de calor en su cocina. ";6;5;1;24;25;1;230;;1;Los refrigeradores y congeladores están presentes en todos los hogares y consumen energía las 24 horas del día. por lo que es necesario asegurar su eficiencia energética a la hora de adquirirlos.  5% del consumo energético en los hogares corresponde a refrigeración de alimentos (refrigerador y freezer).
+39;Frazada eléctrica;Electrodomésticos;0;0;0;1;0;Desenchufar aparatos usando por ejemplo alargadores de tipo corta corriente o enchufe inteligente (certificados por la SEC). ;6;5;1;0.5;100;1;18.25;;0;
+40;Cafereta eléctrica;Electrodomésticos;0;1;0;0;1;"1.- Desenchufe siempre su cafetera después de su uso.
+2.- Si su máquina está equipada con él. utilice el modo de ahorro de energía. Los modelos recientes mantienen el agua caliente durante un período de tiempo libremente definido.
+3.- Alarga la vida útil de tu cafetera descalcificándola periódicamente.";6;5;1;0.191780822;800;1;56;;0;
+41;Lava vajilla;Electrodomésticos;0;1;0;0;0;"1.- Elija un lavavajillas con una capacidad adecuada: de ocho a diez cubiertos para una o dos personas. once cubiertos o más para tres personas o más.
+2.- Opte por un dispositivo con la clase de eficiencia energética más alta.
+3.- Asegúrese de que la forma y el tamaño de su vajilla actual coincidan con el electrodoméstico seleccionado.";6;5;1;1;2000;1;65.7;;1;Lavar los platos en un lavavajillas moderno en lugar de a mano ahorra alrededor de un 50% de agua y un 25% de electricidad. Por lo tanto. un dispositivo eficiente es una buena opción tanto para el medio ambiente como para su bolsillo.
+42;Calefont a GLP;Agua Caliente;1;1;0;0;0;"1.- Instalar en lugares ventilados para un buen funcionamiento
+2.- La instalación y mantencióndebe ser realizada por inistaladores autorizados SEC
+3.- La Temperatura del agua se regula desde el calefon y no desde la llave";1;2;1;0.33314878;17700;0.65;1399;;1;"El 58.9% del consumo de GN+GLP de los hogares es atribuible a ACS
+El sello verde es un sello de seguridadde instalaciones interiores de gas. este certifica que las instalaciones son seguras. La aprobacion debe renovarse cada 2 años. "
+43;Calefont GN;Agua Caliente;1;1;0;0;0;"1.- Instalar en lugares ventilados para un buen funcionamiento
+2.- La instalación y mantencióndebe ser realizada por inistaladores autorizados SEC
+3.- La Temperatura del agua se regula desde el calefon y no desde la llave";2;2;1;0.309352438;17700;0.7;1399;;1;"El 58.9% del consumo de GN+GLP de los hogares es atribuible a ACS
+El sello verde es un sello de seguridadde instalaciones interiores de gas. este certifica que las instalaciones son seguras. La aprobacion debe renovarse cada 2 años. "
+44;Termo electrico;Agua Caliente;1;1;1;0;0;"1.- Se recomienda que la instalación y mantencióndebe ser realizada por inistaladores autorizados SEC
+2.- La Temperatura del agua se regula desde el calefon y no desde la llave";6;2;1;1.533150685;2500;1;1399;;1;El  3% del consumo de electricidad de los hogares es atribuible a ACS
+45;Bomba de calor ACS;Agua Caliente;1;0;0;0;0;"1.- Se recomienda que la instalación y mantencióndebe ser realizada por inistaladores autorizados SEC
+2.- La Temperatura del agua se regula desde el calefon y no desde la llave";6;2;1;1.161477792;1100;3;1399;;1;Uitriliza menos de 1 tercio de la energía que puede utilizar un termo convencional. 
