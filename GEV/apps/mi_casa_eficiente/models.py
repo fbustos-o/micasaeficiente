@@ -87,6 +87,7 @@ class equipos(models.Model):
 class energeticosFenomeno(models.Model):
     energetico_id = models.IntegerField(null=True)
     energetico_fenomeno = models.CharField(max_length=150,blank=True,null=True)
+    unidad = models.CharField(max_length=15,blank=True,null=True)
     poder_calorifico = models.FloatField(blank=True,null=True)
     eficiencia_base = models.FloatField(blank=True,null=True)
     mp25 = models.FloatField(blank=True,null=True)
