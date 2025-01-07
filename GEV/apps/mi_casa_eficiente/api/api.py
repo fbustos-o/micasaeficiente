@@ -63,7 +63,7 @@ def datos_demanda(request, pk=None):
         consulta_mce_serializer = MCESerializer(consulta_resumen, data = request.data)
         if consulta_mce_serializer.is_valid():    
             consulta_mce_serializer.save()
-            respuesta= consulta_mce_serializer.paso_2(consulta_mce_serializer.data) # FIX DE LA FUNCION
+            respuesta= consulta_mce_serializer.paso_2(consulta_mce_serializer.data) 
             return Response(respuesta, status = status.HTTP_201_CREATED)
         return Response(consulta_mce_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
@@ -80,7 +80,7 @@ def edita_consumo(request, pk=None):
         consulta_mce_serializer = MCESerializer(consulta_demanda_base, data = request.data)
         if consulta_mce_serializer.is_valid():    
             consulta_mce_serializer.save()
-            respuesta= consulta_mce_serializer.paso_2_1(consulta_mce_serializer.data) # FIX DE LA FUNCION
+            respuesta= consulta_mce_serializer.paso_2_1(consulta_mce_serializer.data)
             return Response(respuesta, status = status.HTTP_201_CREATED)
         return Response(consulta_mce_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
@@ -92,13 +92,14 @@ def datos_equipos(request, pk=None):
     consulta_equipos = consultasResultados.objects.filter(id = pk).first()
     if request.method == 'GET':
         serializer = MCESerializer(consulta_equipos)
+        print(serializer.data)
         return Response(serializer.data, status = status.HTTP_200_OK)
     #PUT: Ingresa boleano de edición de demanda
     if request.method == 'PUT':
         consulta_mce_serializer = MCESerializer(consulta_equipos, data = request.data)
         if consulta_mce_serializer.is_valid():    
             consulta_mce_serializer.save()
-            respuesta= consulta_mce_serializer.paso_3(consulta_mce_serializer.data) # FIX DE LA FUNCION
+            respuesta= consulta_mce_serializer.paso_3(consulta_mce_serializer.data) 
             return Response(respuesta, status = status.HTTP_201_CREATED)
         return Response(consulta_mce_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 

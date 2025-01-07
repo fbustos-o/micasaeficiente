@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.mi_casa_eficiente.models import  comunas_zt, perfilConsumoTipo, equipos, recomendaciones, consultasResultados #carga bbdd de modelos
+from apps.mi_casa_eficiente.models import  comunas_zt, perfilConsumoTipo, equipos, recomendaciones, consultasResultados, energeticosFenomeno #carga bbdd de modelos
 from apps.f_aux.geo_data import getGeoData, llamado
 #librerias adicionales
 import pandas as pd
@@ -271,7 +271,8 @@ class MCESerializer(serializers.ModelSerializer):
         usa_ker = self.validated_data.get('usa_ker')
         usa_len = self.validated_data.get('usa_len')
         usa_pel = self.validated_data.get('usa_pel')
-        
+
+        #perfil de consumo mensual
         con_elec = self.validated_data.get('con_elec')
         con_gn = self.validated_data.get('con_gn')
         con_glp = self.validated_data.get('con_glp')
@@ -280,39 +281,47 @@ class MCESerializer(serializers.ModelSerializer):
         con_pel = self.validated_data.get('con_pel')
 
         zt_2007 = comunas_zt.objects.filter(id_comuna=instance['id_comuna'], clima=instance['clima']).values_list('zt_2007',flat=True)[0]
+        #comuna = 
+        #region = 
         #Edita las demandas base, siempre que elija cual editar (permite entrar denuevo a cualquier demanda)
         if usa_elec:
-            suma_consumo_elc = sum(con_elec) / 8760
+            pci_comb = energeticosFenomeno.objects.filter(energetico_id = 6).values('poder_calorifico')[0]['poder_calorifico']
+            suma_consumo_elc = sum(con_elec) / 8760 * pci_comb
             consumo_elec =  [suma_consumo_elc]*8760
         else:
             consumo_elec = []
 
-        if usa_gn: 
-            suma_consumo_gn = sum(con_gn) / 8760
+        if usa_gn:
+            pci_comb = energeticosFenomeno.objects.filter(energetico_id = 2).values('poder_calorifico')[0]['poder_calorifico'] 
+            suma_consumo_gn = sum(con_gn) / 8760 * pci_comb
             consumo_gn = [suma_consumo_gn]*8760
         else: 
             consumo_gn = []
 
         if usa_glp:
-            suma_consumo_glp = sum(con_glp) / 8760
+            pci_comb = energeticosFenomeno.objects.filter(energetico_id = 1).values('poder_calorifico')[0]['poder_calorifico']
+            suma_consumo_glp = sum(con_glp) / 8760 * pci_comb
             consumo_glp = [suma_consumo_glp]*8760
         else:
             consumo_glp = []
         
         if usa_ker:
-            suma_consumo_ker = sum(con_ker) / 8760
+            pci_comb = energeticosFenomeno.objects.filter(energetico_id = 3).values('poder_calorifico')[0]['poder_calorifico']
+            suma_consumo_ker = sum(con_ker) / 8760 * pci_comb
             consumo_ker = [suma_consumo_ker]*8760
         else:
             consumo_ker = []
 
         if usa_len:
-            suma_consumo_len = sum(con_len) / 8760
+            pci_comb = energeticosFenomeno.objects.filter(energetico_id = 5).values('poder_calorifico')[0]['poder_calorifico']
+            suma_consumo_len = sum(con_len) / 8760 * pci_comb
             consumo_len = [suma_consumo_len]*8760
         else: 
             consumo_len = []
 
         if usa_pel:
-            suma_consumo_pel = sum(con_pel) / 8760
+            pci_comb = energeticosFenomeno.objects.filter(energetico_id = 4).values('poder_calorifico')[0]['poder_calorifico']
+            suma_consumo_pel = sum(con_pel) / 8760 * pci_comb
             consumo_pel = [suma_consumo_pel]*8760
         else:
             consumo_pel = []
@@ -399,12 +408,12 @@ class MCESerializer(serializers.ModelSerializer):
             'dormitorios' : instance['dormitorios'],
             'anio_construccion' : instance['anio_construccion'],
             'conoce_consumos' : instance['conoce_consumos'],
-            'consumo_elec' : consumo_elec,
-            'consumo_gn' : consumo_gn,
-            'consumo_glp' : consumo_glp,
-            'consumo_ker' : consumo_ker,
-            'consumo_len' : consumo_len,
-            'consumo_pel' : consumo_pel,
+            'consumo_elec' : sum(consumo_elec),
+            'consumo_gn' : sum(consumo_gn),
+            'consumo_glp' : sum(consumo_glp),
+            'consumo_ker' : sum(consumo_ker),
+            'consumo_len' : sum(consumo_len),
+            'consumo_pel' : sum(consumo_pel),
             'equipos_seleccionados': equipos_dict
         }
         r = consultasResultados(
