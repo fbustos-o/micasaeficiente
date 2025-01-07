@@ -88,56 +88,41 @@ Métodos del paso:
 ```json
 Ejemplo solo para la comuna de Arica: 
 HTTP 200 OK
-Allow: POST, GET, OPTIONS
+Allow: POST, OPTIONS, GET
 Content-Type: application/json
 Vary: Accept
 
 {
-    "De Arica y Parinacota": {
-        "comunas": [
-            [
-                "Arica",
-                15101,
-                2
-            ],
-            [
-                "Arica",
-                15101,
-                3
-            ],
-            [
-                "Arica",
-                15101,
-                4
-            ],
-            [
-                "Camarones",
-                15102,
-                2
-            ],
-            [
-                "Camarones",
-                15102,
-                3
-            ],
-            [
-                "Camarones",
-                15102,
-                4
-            ],
-            [
-                "General Lagos",
-                15202,
-                1
-            ],
-            [
-                "Putre",
-                15201,
-                1
-            ]
-        ]
-    }
-  }
+    "regiones": [
+        {
+            "nombre": "De Arica y Parinacota",
+            "id_region": 15,
+            "comunas": [
+                [
+                    "Arica",
+                    15101,
+                    2
+                ],
+                [
+                    "Arica",
+                    15101,
+                    3
+                ],
+                [
+                    "Arica",
+                    15101,
+                    4
+                ],
+                [
+                    "Camarones",
+                    15102,
+                    2
+                ],
+                [
+                    "Camarones",
+                    15102,
+                    3
+                ],
 ```
 
 > Se puede visitar: [https://climatiza.exploradorenergia.cl/home](https://climatiza.exploradorenergia.cl/home) para entender el primer paso.
