@@ -253,7 +253,7 @@ Agregamos otros consumos diferentes:
   "usa_gn": true,
   "usa_glp": false,
   "usa_ker": true,
-  "usa_len": flase,
+  "usa_len": false,
   "usa_pel": true,
   "con_elec": [100, 150, 100, 200, 220, 180, 260, 240, 200, 180, 130, 110],
   "con_gn": [5, 4, 5, 6, 6, 7, 8, 9, 8, 6, 5, 5],
