@@ -1,7 +1,0 @@
-﻿id;energetico_id;energetico_fenomeno;unidad;poder_calorifico;eficiencia_base;mp25;nox;so2;co;co2_eq
-1;1;GLP;kg;12.86;0.9;0.061;1.983;0.003;0.403;0.22788
-2;2;GN;m3;12.14;0.9;0.122;1.504;0.01;0.64;0.20268
-3;3;Kerosene;L;11.97;0.9;0.059;2.662;5.326;0.74;0.26028
-4;4;Pellet;kg;9.58;0.65;1.8;5.3;0.1;10;0.41004
-5;5;Leña;m3st;4.56;0.88;10.69;1.9;0.1;238.5;0.41004
-6;6;Electricidad;kWh;1;1;0;0;0;0;0.2421
