@@ -11,6 +11,7 @@ PostgreSQL (el motor de base de datos) Versión 16.
 
 
 ### Paso 1: Configuración del back-end ⚙️
+-------------------------------------
 
 El back-end es el núcleo de la aplicación, desarrollado en Django. Gestiona la lógica de negocio, los cálculos y la API.
 
@@ -66,6 +67,7 @@ El back-end es el núcleo de la aplicación, desarrollado en Django. Gestiona la
 
 
 ### Paso 2: Carga de datos en la BBDD
+-------------------------------------
 #### **1: Crear las Tablas de la Base de Datos**
 
 Este comando leerá las migraciones de Django y creará la estructura de tablas en tu base de datos PostgreSQL.
@@ -91,6 +93,7 @@ Ejecuta los siguientes comandos. Reemplaza '/ruta/completa/a/micasaeficiente/BBD
 ```
 
 ### Paso 3:  Ejecutar el Servidor del Back-end
+-------------------------------------
 Inicia el servidor de desarrollo:
 ```bash
    python manage.py runsslserver
@@ -99,11 +102,10 @@ Inicia el servidor de desarrollo:
 El servicio de back-end estará disponible en `https://127.0.0.1:8000/`
 
 ### Paso 4: Configuración del Front-end
-
+-------------------------------------
 El front-end se ejecuta en servidores independientes. Necesitarás dos terminales adicionales.
 
 #### Paso 1: Ejecutar la Visualización 3D (Esta alojado dentro del servicio principal del proximo paso)
--------------------------------------
 1. Abre una tercera terminal.
 2. Navega a la carpeta Front-end/:
    cd Front-end/
@@ -112,7 +114,6 @@ El front-end se ejecuta en servidores independientes. Necesitarás dos terminale
 4. El componente 3D estará disponible en `https://localhost:8001` (para cambiar el puerto y la dirección, se debe editar el archivo `servidor_casa_3d.py`)
 
 #### Paso 2: Ejecutar la Aplicación Web Principal
----------------------------------------------
 1. Abre una nueva terminal.
 2. Navega a la carpeta Front-end/:
    cd Front-end/
@@ -122,6 +123,7 @@ El front-end se ejecuta en servidores independientes. Necesitarás dos terminale
 
 
 ### Paso 5: primer uso de la plataforma
+-------------------------------------
 Para utilizar la aplicación con esta configuración se debe verificar que el archivo `url.json` que se encuentra en: `\Front-end\web-front\` se encuentre debidamente configurado, es decir que tenga la siguientes urls:
 ```bash
 {
@@ -130,10 +132,7 @@ Para utilizar la aplicación con esta configuración se debe verificar que el ar
 }
 ```
 
-
-
-
-#Uso del metodo API del Backend:
+# Uso del metodo API del Backend:
 Breve manual de uso de los métodos GET, POST y PUT del back-end de “Mi casa Eficiente”
 
 Para utilizarlo puedes ir a: https://github.com/fbustos-o/micasaeficiente
