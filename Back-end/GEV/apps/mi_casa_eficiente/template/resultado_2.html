@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiqueta Eficiencia Energética</title>
+    <link rel="stylesheet" href="{% static 'style_2.css' %}">
+</head>
+<body>
+    <script>
+        const pkData = JSON.parse('{{ pk|safe }}');
+        const pkFromTemplate = pkData.pk;
+    </script>
+    <script src="{% static 'script_3.js' %}"></script>
+
+    <div class="contenedor-principal">
+        <!-- Sección Izquierda -->
+        <div class="seccion-izquierda">
+            <div class="resultados">
+                <h2>Resultados y Recomendaciones</h2>
+                <div class="grafico-energia">
+                    <div class="escala-container">
+                        <div class="barra-energia">
+                            <div class="nivel-actual"></div>
+                        </div>
+                        <div class="marcadores">
+                            <span>0</span>
+                            <span id="max-energy"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recomendaciones-container">
+                    <h3>Recomendaciones Disponibles</h3>
+                    <div id="lista-recomendaciones" class="lista-recomendaciones"></div>
+                    <button class="btn-calcular" onclick="enviarRecomendaciones()">Calcular Mejoras</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Derecha -->
+        <div class="seccion-derecha">
+            <div class="resultados-mejoras">
+                <h2>Resultado de Mejoras</h2>
+                <div class="grafico-comparativo">
+                    <div class="escala-container">
+                        <div class="barra-energia">
+                            <div class="nivel-actual"></div>
+                            <div class="nivel-mejora"></div>
+                        </div>
+                        <div class="marcadores">
+                            <span>0</span>
+                            <span id="max-energy-mejora"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metricas-mejora">
+                    <div class="metrica">
+                        <h4>Eficiencia Energética</h4>
+                        <div class="barra-rango">
+                            <div class="rango" id="rango-eficiencia"></div>
+                            <div class="flecha-promedio"></div>
+                        </div>
+                    </div>
+                    <div class="metrica">
+                        <h4>Ahorro Anual</h4>
+                        <div class="valor-ahorro" id="ahorro-anual"></div>
+                    </div>
+                    <div class="metrica">
+                        <h4>Emisiones Evitadas</h4>
+                        <div class="valor-emisiones" id="emisiones-evitadas"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

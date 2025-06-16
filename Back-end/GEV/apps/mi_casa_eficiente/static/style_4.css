@@ -1,0 +1,511 @@
+/* style.css - Versión mejorada */
+:root {
+    --color-a-plus: #008450;    /* Verde oscuro */
+    --color-a: #38b000;         /* Verde */
+    --color-b: #70e000;         /* Verde claro */
+    --color-c: #ffe600;         /* Amarillo */
+    --color-d: #ffb700;         /* Amarillo dorado */
+    --color-e: #ff9500;         /* Naranja */
+    --color-f: #ff5800;         /* Naranja rojizo */
+    --color-g: #c10000;         /* Rojo */
+    
+    --color-primary: #2c3e50;
+    --color-secondary: #3498db;
+    --color-background: #f8f9fa;
+    --color-border: #e9ecef;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.etiqueta {
+    width: 650px;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 25px;
+}
+
+.encabezado {
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.titulo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+/* SECCIÓN DE CONSUMO Y AHORRO */
+.consumo-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.consumo-card, .ahorro-card {
+    flex: 1;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    text-align: center;
+}
+
+.consumo-titulo {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    color: #6c757d;
+}
+
+.valor-actual, .valor-ahorro {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 12px 15px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.valor-actual {
+    background-color: #ff9500;  /* Por defecto naranja, se actualizará según posición */
+    color: white;
+}
+
+.valor-ahorro {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    position: relative;
+}
+
+.ahorro-porcentaje {
+    font-size: 12px;
+    background-color: #2e7d32;
+    color: white;
+    border-radius: 20px;
+    padding: 3px 8px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ESCALA DE EFICIENCIA */
+.escala-container {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.escala {
+    position: relative;
+    height: 55px;
+    margin-bottom: 40px;
+}
+
+.barra-clasificacion {
+    display: flex;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.clasificacion-segment {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.letra {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+/* Colores para cada segmento */
+.a-plus { background-color: var(--color-a-plus); }
+.a { background-color: var(--color-a); }
+.b { background-color: var(--color-b); }
+.c { background-color: var(--color-c); color: #333; }
+.d { background-color: var(--color-d); color: #333; }
+.e { background-color: var(--color-e); }
+.f { background-color: var(--color-f); }
+.g { background-color: var(--color-g); }
+
+/* Segmentos C y D tienen texto oscuro para mejor contraste */
+.c .letra, .d .letra {
+    color: #333;
+    text-shadow: none;
+}
+
+.marcadores {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.marcador {
+    position: absolute;
+    width: 40px;
+    height: 70px;
+    top: -5px;
+}
+
+.flecha-marcador {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 25px solid #333;
+    margin: 0 auto;
+}
+
+.consumo-actual .flecha-marcador {
+    border-top-color: #333;
+}
+
+.consumo-potencial .flecha-marcador {
+    border-top-color: #2e7d32;
+}
+
+.marcador span {
+    display: block;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 5px;
+    width: 120px;
+    margin-left: -40px;
+}
+
+.consumo-actual span {
+    color: #333;
+}
+
+.consumo-potencial span {
+    color: #2e7d32;
+}
+
+.escala-limites {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+.texto-consumo {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 15px;
+}
+
+/* GRÁFICO DE TORTA */
+.distribucion-container {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.subtitulo {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+}
+
+.subtitulo i {
+    margin-right: 10px;
+    color: var(--color-secondary);
+}
+
+.grafico-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.grafico-torta-container {
+    width: 180px;
+    height: 180px;
+    position: relative;
+}
+
+.grafico-torta {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.sector-torta {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);
+    transform-origin: center;
+}
+
+.grafico-leyenda {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.leyenda-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.leyenda-texto {
+    flex: 1;
+}
+
+.leyenda-porcentaje {
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+/* ACORDEÓN DE MEJORAS */
+.mejoras {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.acordeon-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.acordeon-item {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.acordeon-header {
+    padding: 15px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.acordeon-header:hover {
+    background-color: #e9ecef;
+}
+
+.acordeon-header i {
+    transition: transform 0.3s;
+}
+
+.acordeon-header.activo {
+    background-color: #e9ecef;
+}
+
+.acordeon-header.activo i {
+    transform: rotate(180deg);
+}
+
+.acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.acordeon-content.visible {
+    max-height: 500px;
+    padding: 15px;
+}
+
+.recomendacion-item {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.recomendacion-item:before {
+    content: '•';
+    position: absolute;
+    left: 5px;
+    color: var(--color-secondary);
+}
+
+/* BENEFICIOS */
+.beneficios {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.beneficios-cards {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.beneficio-card {
+    flex: 1;
+    min-width: 150px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.beneficio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.beneficio-card i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--color-secondary);
+}
+
+.beneficio-valor {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--color-primary);
+}
+
+.beneficio-texto {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+/* QR Y PIE */
+.qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.qr img {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.qr p {
+    font-size: 13px;
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+.pie {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    padding-top: 15px;
+    border-top: 1px solid var(--color-border);
+}
+
+/* RESPONSIVE */
+@media (max-width: 650px) {
+    .etiqueta {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .consumo-container {
+        flex-direction: column;
+    }
+    
+    .grafico-container {
+        flex-direction: column;
+    }
+    
+    .grafico-leyenda {
+        width: 100%;
+    }
+    
+    .beneficios-cards {
+        flex-direction: column;
+    }
+}
+
+/* ANIMACIONES */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.highlight {
+    animation: pulse 1.5s infinite;
+}
