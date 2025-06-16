@@ -1,6 +1,139 @@
-# Mi Casa Eficiente
+#  🚀 Mi Casa Eficiente
 ![image](https://github.com/user-attachments/assets/1ac1b78a-8dce-4496-a54a-b6bd3a1a2b4c)
 
+Breve manual de inatalación. 
+
+## 📋 Pre-requisitos
+Antes de comenzar, asegúrate de tener instalado el siguiente software en tu sistema:
+
+Python 3.10 o superior
+PostgreSQL (el motor de base de datos) Versión 16.
+
+
+### Paso 1: Configuración del back-end ⚙️
+
+El back-end es el núcleo de la aplicación, desarrollado en Django. Gestiona la lógica de negocio, los cálculos y la API.
+
+#### **1: Configurar la Base de Datos PostgreSQL**
+
+1.  Abre una terminal de `psql` o usa una herramienta gráfica como pgAdmin.
+2.  Crea un nuevo usuario y una nueva base de datos para el proyecto. **Recuerda la contraseña que elijas.**
+
+    ```sql
+    CREATE DATABASE micasaeficiente_db;
+    CREATE USER micasaeficiente_user WITH PASSWORD 'tu_contraseña_segura';
+    GRANT ALL PRIVILEGES ON DATABASE micasaeficiente_db TO micasaeficiente_user;
+    ```
+
+#### **2: Preparar el Entorno del Proyecto**
+
+1.  Navega al directorio del back-end en tu terminal.
+    ```bash
+    cd Back-end/GEV/
+    ```
+2.  Crea y activa un entorno virtual. Esto aísla las dependencias del proyecto.
+    * **Windows:**
+        ```bash
+        python -m venv venv
+        .\venv\Scripts\activate
+        ```
+    * **macOS / Linux:**
+        ```bash
+        python3 -m venv venv
+        source venv/bin/activate
+        ```
+3.  Instala todas las librerías necesarias.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+#### **3: Configurar las Variables de Entorno**
+
+1.  En la raíz del back-end (`Back-end/GEV/`), crea un archivo llamado `.env`.
+2.  Añade la siguiente configuración al archivo `.env`, reemplazando los valores de la base de datos con los que creaste en el Paso 1.
+
+    ```env
+    # Variables de entorno para Django
+    	DB_ENGINE='django.db.backends.postgresql_psycopg2'
+	DB_NAME='micasaeficiente_db'
+	DB_USER='micasaeficiente_user'
+	DB_PASSWORD='tu_contraseña_segura'
+	DB_HOST='127.0.0.1'
+	DB_PORT='5432'
+    ```
+3.  **Importante**: Asegúrate de que el archivo `.env` esté incluido en tu `.gitignore` para no exponer tus credenciales.
+
+
+
+### Paso 2: Carga de datos en la BBDD
+#### **1: Crear las Tablas de la Base de Datos**
+
+Este comando leerá las migraciones de Django y creará la estructura de tablas en tu base de datos PostgreSQL.
+```bash
+python manage.py makemigrations 
+python manage.py migrate
+```
+
+#### **2: Carga inicial de datos (Carpeta BBDD -> archivos csv)
+Conéctate a tu base de datos con psql (revisa bien el nombre de la BBDD creada):
+```bash
+   psql -U micasaeficiente_user -d micasaeficiente_db
+```
+Ejecuta los siguientes comandos. Reemplaza '/ruta/completa/a/micasaeficiente/BBDD/' con la ruta real en tu sistema.
+
+```bash
+   \copy mi_casa_eficiente_comunazt(id, nombre, zt, region) FROM '/ruta/completa/a/micasaeficiente/BBDD/1_-_comuna_zt.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
+   \copy mi_casa_eficiente_perfilconsumo(id, tipo_perfil, tipo_vivienda, zona_termica, consumo_mensual_kwh, fuente) FROM '/ruta/completa/a/micasaeficiente/BBDD/2_-_perfilConsumoTipo.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
+   \copy mi_casa_eficiente_equipos(id, tipo_equipo, subtitulo, consumo_kwh, uso_promedio_diario_hrs, etiqueta, grupo, icono) FROM '/ruta/completa/a/micasaeficiente/BBDD/3_-_equipos.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
+   \copy mi_casa_eficiente_recomendaciones(id, recomendacion, detalle, tipo_equipo_asociado, ahorro_estimado_kwh) FROM '/ruta/completa/a/micasaeficiente/BBDD/4_-_recomendaciones.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
+   \copy mi_casa_eficiente_energeticosfenomeno(id, energetico, fenomeno, factor_conversion, unidad) FROM '/ruta/completa/a/micasaeficiente/BBDD/5_-_energetico_fenomeno.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
+   \copy mi_casa_eficiente_costoenergetico(id, energetico, empresa, cargo_fijo, precio_unitario, anio, mes, region) FROM '/ruta/completa/a/micasaeficiente/BBDD/6_-_costo_energetico.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
+```
+
+### Paso 3:  Ejecutar el Servidor del Back-end
+Inicia el servidor de desarrollo:
+```bash
+   python manage.py runsslserver
+```
+
+El servicio de back-end estará disponible en `https://127.0.0.1:8000/`
+
+### Paso 4: Configuración del Front-end
+
+El front-end se ejecuta en servidores independientes. Necesitarás dos terminales adicionales.
+
+#### Paso 1: Ejecutar la Visualización 3D (Esta alojado dentro del servicio principal del proximo paso)
+-------------------------------------
+1. Abre una tercera terminal.
+2. Navega a la carpeta Front-end/:
+   cd Front-end/
+3. Ejecuta el servidor dedicado:
+   python servidor_casa_3d.py
+4. El componente 3D estará disponible en `https://localhost:8001` (para cambiar el puerto y la dirección, se debe editar el archivo `servidor_casa_3d.py`)
+
+#### Paso 2: Ejecutar la Aplicación Web Principal
+---------------------------------------------
+1. Abre una nueva terminal.
+2. Navega a la carpeta Front-end/:
+   cd Front-end/
+3. Ejecuta el servidor:
+   python servidor_https.py
+4. La aplicación web estará accesible en `https://localhost:4443` (para cambiar el puerto y la dirección, se debe editar el archivo `servidor_htpps.py`)
+
+
+### Paso 5: primer uso de la plataforma
+Para utilizar la aplicación con esta configuración se debe verificar que el archivo `url.json` que se encuentra en: `\Front-end\web-front\` se encuentre debidamente configurado, es decir que tenga la siguientes urls:
+```bash
+{
+	"url_end_point": "https://127.0.0.1:8000/mi_casa_eficiente",
+	"url_iframe_3d": "https://127.0.0.1:8001/"
+}
+```
+
+
+
+
+#Uso del metodo API del Backend:
 Breve manual de uso de los métodos GET, POST y PUT del back-end de “Mi casa Eficiente”
 
 Para utilizarlo puedes ir a: https://github.com/fbustos-o/micasaeficiente
