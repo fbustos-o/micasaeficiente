@@ -1,0 +1,654 @@
+{
+    "c2array": true,
+    "size": [
+        7,
+        30,
+        1
+    ],
+    "data": [
+        [
+            [
+                "Disminuye el tiempo en la ducha. No más de 8 minutos bastarán para una ducha eficiente."
+            ],
+            [
+                "Realizar el lavado de ropa a carga completa."
+            ],
+            [
+                "Realizar el lavado de ropa con agua fría en vez de caliente."
+            ],
+            [
+                "Instala aireadores en lavaplatos, lavamanos y ducha."
+            ],
+            [
+                "Instalar colectores solares térmicos para el Agua Caliente Sanitaria."
+            ],
+            [
+                "Reemplazar el calefon por una bomba de calor aire-agua"
+            ],
+            [
+                "Recambia tu equipo para calentar agua por uno más eficiente."
+            ],
+            [
+                "Cambio de refrigerador a uno más eficiente"
+            ],
+            [
+                "Haz más eficiente tu consumo eléctrico, revisa cuanto tiempo usas estos equipos y reduce su uso en tiempos no necesarios. "
+            ],
+            [
+                "Recambia tus equipos eléctricos por equipos más eficientes"
+            ],
+            [
+                "Reemplazar secadora convencional por una secadora con bomba de calor"
+            ],
+            [
+                "Cambio de tv a una más eficiente"
+            ],
+            [
+                "Evitar el consumo stand-by"
+            ],
+            [
+                "Reemplazar el calefactor a leña por calefactor a pellet"
+            ],
+            [
+                "Reemplazo de sistema de calefacción por bomba de calor de alta eficiencia"
+            ],
+            [
+                "Sella las infiltraciones de aire en puertas y ventanas"
+            ],
+            [
+                "Aisla térmicamente tu vivienda. Comienza por el techo, luego ventanas, muros y si es posible, el suelo."
+            ],
+            [
+                "Cambia tus ventanas por ventanas de doble o triple vidrio hermético. Idealmente con marco de PVC"
+            ],
+            [
+                "Recambia tus equipos de calefacción por equipos más eficientes. Revisa su etiqueta de eficiencia energética."
+            ],
+            [
+                "Utilizar termo/hervidor eléctrico"
+            ],
+            [
+                "Cuando tengas que hacer cocciones largas utiliza una olla a presión"
+            ],
+            [
+                "Recambia tu cocina por una más eficiente"
+            ],
+            [
+                "Revisa la etiqueta de eficiencia energética de tus electrodomésticos de cocina y busca unos de mejor desempeño."
+            ],
+            [
+                "Recambia tu horno por uno más eficiente"
+            ],
+            [
+                "Haz más eficiente el consumo de iluminación solo encendiendo las luces cuando sean estrictamente necesarias"
+            ],
+            [
+                "Recambia tus luminarias por luminarias más eficientes. Revisa la potencia de tus luces y busca unas que consuman menos. No olvides revisar que mantengan la misma calidad de iluminación"
+            ],
+            [
+                "Protege las ventanas del sol."
+            ],
+            [
+                "Aísla térmicamente tu vivienda. Comienza por el techo, luego ventanas, muros y si es posible, el suelo."
+            ],
+            [
+                "Cambia tus ventanas por ventanas de doble o triple vidrio hermético. Idealmente con marco de PVC."
+            ],
+            [
+                "Recambia tus equipos de aire acondicionado o ventilación por unos más eficientes. Revisa su etiqueta de eficiencia energética."
+            ]
+        ],
+        [
+            [
+                "15% - 30% de ahorro"
+            ],
+            [
+                "15% - 30% de ahorro"
+            ],
+            [
+                "15% - 30% de ahorro"
+            ],
+            [
+                "15% - 30% de ahorro"
+            ],
+            [
+                "15% - 30% de ahorro"
+            ],
+            [
+                "15% - 30% de ahorro"
+            ],
+            [
+                "15% - 30% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 5% de ahorro"
+            ],
+            [
+                "Hasta un 40% de ahorro"
+            ],
+            [
+                "Hasta un 50% de ahorro"
+            ],
+            [
+                "Hasta un 50% de ahorro"
+            ],
+            [
+                "Hasta un 40% de ahorro"
+            ],
+            [
+                "Hasta un 50% de ahorro"
+            ],
+            [
+                "Hasta un 5% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 5% de ahorro"
+            ],
+            [
+                "Hasta un 40% de ahorro"
+            ],
+            [
+                "Hasta un 40% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 15% de ahorro"
+            ],
+            [
+                "Hasta un 30% de ahorro"
+            ],
+            [
+                "Hasta un 40% de ahorro"
+            ],
+            [
+                "Hasta un 50% de ahorro"
+            ],
+            [
+                "Hasta un 50% de ahorro"
+            ],
+            [
+                "Hasta un 40% de ahorro"
+            ]
+        ],
+        [
+            [
+                "Agua"
+            ],
+            [
+                "Agua"
+            ],
+            [
+                "Agua"
+            ],
+            [
+                "Agua"
+            ],
+            [
+                "Agua"
+            ],
+            [
+                "Agua"
+            ],
+            [
+                "Agua"
+            ],
+            [
+                "Electrodomesticos"
+            ],
+            [
+                "Electrodomesticos"
+            ],
+            [
+                "Electrodomesticos"
+            ],
+            [
+                "Electrodomesticos"
+            ],
+            [
+                "Electrodomesticos"
+            ],
+            [
+                "Electrodomesticos"
+            ],
+            [
+                "Calefaccion"
+            ],
+            [
+                "Calefaccion"
+            ],
+            [
+                "Calefaccion"
+            ],
+            [
+                "Calefaccion"
+            ],
+            [
+                "Calefaccion"
+            ],
+            [
+                "Calefaccion"
+            ],
+            [
+                "Cocina"
+            ],
+            [
+                "Cocina"
+            ],
+            [
+                "Cocina"
+            ],
+            [
+                "Cocina"
+            ],
+            [
+                "Cocina"
+            ],
+            [
+                "Iluminacion"
+            ],
+            [
+                "Iluminacion"
+            ],
+            [
+                "Enfriamiento"
+            ],
+            [
+                "Enfriamiento"
+            ],
+            [
+                "Enfriamiento"
+            ],
+            [
+                "Enfriamiento"
+            ]
+        ],
+        [
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                1
+            ],
+            [
+                2
+            ],
+            [
+                3
+            ],
+            [
+                3
+            ],
+            [
+                2
+            ],
+            [
+                0
+            ],
+            [
+                1
+            ],
+            [
+                2
+            ],
+            [
+                1
+            ],
+            [
+                0
+            ],
+            [
+                2
+            ],
+            [
+                3
+            ],
+            [
+                1
+            ],
+            [
+                3
+            ],
+            [
+                3
+            ],
+            [
+                2
+            ],
+            [
+                1
+            ],
+            [
+                1
+            ],
+            [
+                3
+            ],
+            [
+                3
+            ],
+            [
+                2
+            ],
+            [
+                0
+            ],
+            [
+                2
+            ],
+            [
+                1
+            ],
+            [
+                3
+            ],
+            [
+                3
+            ],
+            [
+                2
+            ]
+        ],
+        [
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ],
+            [
+                0
+            ]
+        ],
+        [
+            [
+                0
+            ],
+            [
+                1
+            ],
+            [
+                2
+            ],
+            [
+                3
+            ],
+            [
+                4
+            ],
+            [
+                5
+            ],
+            [
+                6
+            ],
+            [
+                3
+            ],
+            [
+                0
+            ],
+            [
+                5
+            ],
+            [
+                1
+            ],
+            [
+                2
+            ],
+            [
+                4
+            ],
+            [
+                0
+            ],
+            [
+                1
+            ],
+            [
+                2
+            ],
+            [
+                3
+            ],
+            [
+                4
+            ],
+            [
+                5
+            ],
+            [
+                2
+            ],
+            [
+                1
+            ],
+            [
+                3
+            ],
+            [
+                0
+            ],
+            [
+                4
+            ],
+            [
+                0
+            ],
+            [
+                1
+            ],
+            [
+                0
+            ],
+            [
+                1
+            ],
+            [
+                2
+            ],
+            [
+                3
+            ]
+        ],
+        [
+            [
+                13
+            ],
+            [
+                15
+            ],
+            [
+                16
+            ],
+            [
+                14
+            ],
+            [
+                17
+            ],
+            [
+                18
+            ],
+            [
+                19
+            ],
+            [
+                4
+            ],
+            [
+                5
+            ],
+            [
+                6
+            ],
+            [
+                2
+            ],
+            [
+                3
+            ],
+            [
+                1
+            ],
+            [
+                7
+            ],
+            [
+                8
+            ],
+            [
+                9
+            ],
+            [
+                10
+            ],
+            [
+                11
+            ],
+            [
+                12
+            ],
+            [
+                23
+            ],
+            [
+                22
+            ],
+            [
+                24
+            ],
+            [
+                26
+            ],
+            [
+                25
+            ],
+            [
+                20
+            ],
+            [
+                21
+            ],
+            [
+                27
+            ],
+            [
+                28
+            ],
+            [
+                29
+            ],
+            [
+                30
+            ]
+        ]
+    ]
+}
