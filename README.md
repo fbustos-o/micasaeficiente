@@ -132,6 +132,8 @@ Para utilizar la aplicación con esta configuración se debe verificar que el ar
 }
 ```
 
+
+-------------------------------------
 # Uso del metodo API del Backend:
 Breve manual de uso de los métodos GET, POST y PUT del back-end de “Mi casa Eficiente”
 
@@ -143,8 +145,8 @@ Las bases de datos a pre-cargar en el back-end son las siguientes:
 2. perfilConsumoTipo.csv
 3. equipos.csv
 4. recomendaciones.csv
-
-Se puede descargar desde el siguiente [link](https://minenergia-my.sharepoint.com/:f:/g/personal/fbustos_minenergia_cl/Eqws0780Kf1DvVfP0xhIfDQBZ3AU_7WRxs19yDHkjso6HA?e=OzZa6A). 
+5. Enegergetico_fenomeno.csv
+6. Costo_energetico.csv
 
 ## Pasos de consulta
 
