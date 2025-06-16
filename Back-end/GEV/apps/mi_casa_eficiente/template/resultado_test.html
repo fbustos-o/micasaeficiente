@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiqueta Eficiencia Energética</title>
+    <link rel="stylesheet"href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <!-- SCRIPTS BASE PARA ALIMENTAR scrip.js -->
+    <script>
+        const pkData = JSON.parse('{{ pk|safe }}'); // Parse the JSON string
+        const pkFromTemplate = pkData.pk;
+    </script>
+    <script src="{% static 'script_2.js' %}"></script>
+
+    <div class="etiqueta">
+        <div class="encabezado">
+            <div class="logo">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </div>
+            <div class="titulo">Eficiencia Energética del Hogar</div>
+        </div>
+        <div class="consumo">
+            <div class="valor-actual-container">
+                <div class="valor-actual" id="valor_actual" name="valor_actual" style="background-color: #FFA500;">
+                    1000 kWh/año
+                </div>
+            </div>
+            <div class="escala" data-maximo="5000" data-consumo="800">
+                <div class="barra">
+                    <div class="seccion s1" style="width: 14.28%"></div>
+                    <div class="seccion s2" style="width: 14.28%"></div>
+                    <div class="seccion s3" style="width: 14.28%"></div>
+                    <div class="seccion s4" style="width: 14.28%"></div>
+                    <div class="seccion s5" style="width: 14.28%"></div>
+                    <div class="seccion s6" style="width: 14.28%"></div>
+                    <div class="seccion s7" style="width: 14.28%"></div>
+                    <div class="seccion s8" style="width: 0%"></div>
+                </div>
+                <div class="flecha"></div>
+                <div class="limites">
+                    <span class="minimo">0 kWh/año</span>
+                    <span class="maximo">1200 kWh/año</span>
+                </div>
+            </div>
+            <div class="texto-consumo">Consumo Anual Estimado</div>
+        </div>
+    
+        <!-- TESTS  -->
+
+        <div class="descripcion">
+            <div class="subtitulo">Detalle del Desempeño</div>
+            <table>
+                <tr><td>Iluminación:</td><td>⭐⭐⭐⭐</td></tr>
+                <tr><td>Electrodomésticos:</td><td>⭐⭐⭐</td></tr>
+                <tr><td>Cocina:</td><td>⭐⭐</td></tr>
+                <tr><td>Agua Caliente:</td><td>⭐⭐</td></tr>
+                <tr><td>Calefacción:</td><td>⭐⭐⭐⭐⭐</td></tr>
+                <tr><td>Enfriamiento:</td><td>⭐⭐⭐</td></tr>
+            </table>
+        </div>
+
+        <div class="mejoras">
+            <div class="subtitulo">Mejoras Recomendadas Seleccionadas</div>
+            <div id="recomendaciones-list">
+                <ol>
+                    <li>Reduce tu consumo de equipos eléctricos
+                    <ul>      <li>Evitar el consumo stand-by</li>     <li>Recambia tus equipos eléctricos por equipos más eficientes</li>    </ul>
+                    </li>
+                    <li>Reduce tu consumo en la cocina
+                    <ul>      <li>Cuando tengas que hacer cocciones largas utiliza una olla a presión </li>      </ul>
+                    </li>
+                    <li>Reduce tu consumo en calefacción
+                    <ul>      <li>Recambia tus equipos de calefacción por equipos más eficientes. Revisa su etiqueta de eficiencia energética. </li>    </ul>
+                    </li>
+                    <li>Reduce tu consumo en calentar agua para ducha y cocina
+                    <ul>      <li>Realizar el lavado de ropa con agua fría en vez de caliente</li>    </ul>
+                    </li>
+                    <li>Reduce tu consumo en ventilación y enfriamiento
+                    <ul>      <li>Protege las ventas del sol</li>    </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="qr">
+            <img src="{% static 'qr-code.png' %}" alt="Código QR">
+            <p>Escanea para más información</p>
+        </div>
+        <div class="pie">Fecha de Emisión: 2024-10-27</div>
+
+    </div>
+
+</body>
+
+</html>

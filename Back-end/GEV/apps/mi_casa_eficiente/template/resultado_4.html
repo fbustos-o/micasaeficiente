@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiqueta Eficiencia Energética</title>
+    <link rel="stylesheet" href="{% static 'style_4.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- SCRIPTS BASE PARA ALIMENTAR script.js -->
+    <script>
+        const pkData = JSON.parse('{{ pk|safe }}');
+        const pkFromTemplate = pkData.pk;
+    </script>
+    <script src="{% static 'script_4.js' %}"></script>
+
+    <div class="etiqueta">
+        <div class="encabezado">
+            <div class="logo">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </div>
+            <div class="titulo">Eficiencia Energética del Hogar</div>
+        </div>
+
+        <!-- SECCIÓN DE CONSUMO Y AHORRO -->
+        <div class="consumo-container">
+            <div class="consumo-card">
+                <div class="consumo-titulo">CONSUMO ACTUAL</div>
+                <div class="valor-actual-container">
+                    <div class="valor-actual" id="valor_actual">
+                        <span id="valor-consumo">4655</span> kWh/año
+                    </div>
+                </div>
+            </div>
+
+            <div class="ahorro-card">
+                <div class="consumo-titulo">AHORRO POTENCIAL</div>
+                <div class="valor-ahorro-container">
+                    <div class="valor-ahorro" id="valor_ahorro">
+                        <span id="valor-ahorro-numero">1192</span> kWh/año
+                        <div class="ahorro-porcentaje">
+                            <i class="fas fa-arrow-down"></i> <span id="valor-ahorro-porcentaje">25.6</span>%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESCALA DE EFICIENCIA CON LETRAS -->
+        <div class="escala-container">
+            <div class="escala">
+                <div class="barra-clasificacion">
+                    <div class="clasificacion-segment a-plus">
+                        <span class="letra">A+</span>
+                    </div>
+                    <div class="clasificacion-segment a">
+                        <span class="letra">A</span>
+                    </div>
+                    <div class="clasificacion-segment b">
+                        <span class="letra">B</span>
+                    </div>
+                    <div class="clasificacion-segment c">
+                        <span class="letra">C</span>
+                    </div>
+                    <div class="clasificacion-segment d">
+                        <span class="letra">D</span>
+                    </div>
+                    <div class="clasificacion-segment e">
+                        <span class="letra">E</span>
+                    </div>
+                    <div class="clasificacion-segment f">
+                        <span class="letra">F</span>
+                    </div>
+                    <div class="clasificacion-segment g">
+                        <span class="letra">G</span>
+                    </div>
+                </div>
+                
+                <!-- MARCADORES DE CONSUMO Y AHORRO -->
+                <div class="marcadores">
+                    <div class="marcador consumo-actual" id="marcador-actual">
+                        <div class="flecha-marcador"></div>
+                        <span>Tú hogar</span>
+                    </div>
+                    <div class="marcador consumo-potencial" id="marcador-potencial">
+                        <div class="flecha-marcador"></div>
+                        <span>Con recomendación</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="escala-limites">
+                <span>Consumo ideal: 0 kWh/año</span>
+                <span>Máximo regional: <span id="consumo-maximo">5000</span> kWh/año</span>
+            </div>
+            
+            <div class="texto-consumo">Consumo Anual Estimado y Potencial de Mejora</div>
+        </div>
+    
+        <!-- DISTRIBUCIÓN DEL CONSUMO (GRÁFICO DE TORTA) -->
+        <div class="distribucion-container">
+            <div class="subtitulo">
+                <i class="fas fa-chart-pie"></i> Distribución del Consumo Energético
+            </div>
+            
+            <div class="grafico-container">
+                <div class="grafico-torta-container">
+                    <div class="grafico-torta" id="grafico-torta">
+                        <!-- El gráfico de torta se generará con JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="grafico-leyenda" id="grafico-leyenda">
+                    <!-- La leyenda se generará con JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- MEJORAS RECOMENDADAS CON ACORDEÓN -->
+        <div class="mejoras">
+            <div class="subtitulo">
+                <i class="fas fa-lightbulb"></i> Mejoras Recomendadas
+            </div>
+            <div class="acordeon-container" id="recomendaciones-acordeon">
+                <!-- Los acordeones se generarán dinámicamente con JavaScript -->
+            </div>
+        </div>
+
+        <!-- BENEFICIOS MONETARIOS Y AMBIENTALES -->
+        <div class="beneficios">
+            <div class="subtitulo">
+                <i class="fas fa-hand-holding-usd"></i> Beneficios Estimados
+            </div>
+            <div class="beneficios-cards">
+                <div class="beneficio-card">
+                    <i class="fas fa-coins"></i>
+                    <div class="beneficio-valor" id="ahorro-monetario">$191.388</div>
+                    <div class="beneficio-texto">Ahorro anual</div>
+                </div>
+                <div class="beneficio-card">
+                    <i class="fas fa-leaf"></i>
+                    <div class="beneficio-valor" id="ahorro-co2">2.5 ton</div>
+                    <div class="beneficio-texto">CO2 evitado</div>
+                </div>
+                <div class="beneficio-card">
+                    <i class="fas fa-tools"></i>
+                    <div class="beneficio-valor" id="nivel-inversion">Media</div>
+                    <div class="beneficio-texto">Inversión</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR CODE -->
+        <div class="qr">
+            <img src="{% static 'qr-code.png' %}" alt="Código QR">
+            <p>Escanea para más información</p>
+        </div>
+        
+        <div class="pie">Fecha de Emisión: <span id="fecha-emision">2025-03-04</span></div>
+    </div>
+
+</body>
+</html>
