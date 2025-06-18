@@ -1,0 +1,68 @@
+
+services:
+  # --- SERVICIO DE BASE DE DATOS POSTGRESQL ---
+  # Este es el servicio "db" que faltaba.
+  db:
+    image: postgres:16-alpine
+    container_name: micasa_db
+     # Mapea el puerto 5433 de tu PC al puerto 5432 del contenedor - para conección pgadmin
+    ports:
+      - "5433:5432"
+    volumes:
+      # Este volumen guarda los datos de la base de datos para que no se pierdan.
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      # Estas variables crean la base de datos y el usuario al iniciar.
+      # DEBEN COINCIDIR con lo que tienes en tu archivo .env
+      - POSTGRES_DB=MCE # <- AJUSTAR A LO QUE SE TENGA EN EL DB_NAME .env
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=FB.Energia2022 # <- AJUSTAR A LO QUE SE TENGA EN EL .env
+    restart: unless-stopped
+
+  # --- SERVICIO DEL BACKEND (DJANGO) ---
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: micasa_backend
+    command: >
+      sh -c "python manage.py migrate && 
+             python manage.py load_initial_data &&
+             gunicorn GEV.wsgi:application --bind 0.0.0.0:8000"
+    # Añade este nuevo comando para listar los archivos y mantener el contenedor vivo
+    # --- INICIO DE LA SECCIÓN CORREGIDA ---
+    # Usamos la sintaxis de bloque literal "|" para asegurar que el comando
+    # sea leído como una única cadena de texto sin errores de sintaxis.
+    #command: |
+    #  sh -c "echo '--- Contenido de /app: ---' && ls -l /app && echo '--- Contenido de /app/BBDD (si existe): ---' && ls -l /app/BBDD && sleep 3600"
+    # --- FIN DE LA SECCIÓN CORREGIDA ---
+    #volumes:
+    #  - ./Back-end/GEV:/app
+    # Con 'depends_on', Docker se asegura de que 'db' intente iniciar antes que 'backend'.
+    depends_on:
+      - db
+    restart: unless-stopped
+    # No necesitamos 'ports' aquí, ya que Nginx se comunica internamente.
+
+  # --- SERVICIO DEL FRONTEND (NGINX) ---
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: micasa_frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Sintaxis: <ruta_en_tu_pc>:<ruta_en_el_contenedor>
+      - ./Front-end/cert.pem:/etc/nginx/ssl/cert.pem
+      - ./Front-end/key.pem:/etc/nginx/ssl/key.pem
+
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+# --- DEFINICIÓN DE VOLÚMENES ---
+# Aquí se define el volumen para persistir los datos de PostgreSQL.
+volumes:
+  postgres_data:

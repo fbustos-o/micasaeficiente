@@ -1,4 +1,4 @@
-﻿id;ID_regional;ID_provincia;ID_comuna; Región;Provincia ;Comuna;zt;zt_2007;limite_meridiano;limite_altitud;tipo_clima;clima;PDA;prohibicion_lena;prohibicion_pellet;plan_PDA_actual;link_PDA;lat;lon
+﻿id;ID_regional;ID_provincia;ID_comuna;Región;Provincia;Comuna;zt;zt_2007;limite_meridiano;limite_altitud;tipo_clima;clima;PDA;prohibicion_lena;prohibicion_pellet;plan_PDA_actual;link_PDA;lat;lon
 1;15;151;15101;De Arica y Parinacota;Arica  ;Arica;A;1;;<1100;Costa;2;false;;;;;-18.476734;-70.294249
 2;15;151;15101;De Arica y Parinacota;Arica  ;Arica;B;1;;1100<altitud<3000;Valle;3;false;;;;;-18.535216;-69.877873
 3;15;151;15101;De Arica y Parinacota;Arica  ;Arica;H;5;;>3000;Cordillera;4;false;;;;;-18.400602;-69.701492

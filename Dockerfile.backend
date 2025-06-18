@@ -1,0 +1,24 @@
+# Usar una imagen oficial de Python como base
+FROM python:3.11-slim
+
+# Establecer variables de entorno para evitar que Python genere archivos .pyc y para que los logs se muestren en la consola
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Establecer el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiar la carpeta con los archivos CSV dentro de la imagen
+COPY BBDD/ /app/BBDD/
+
+# Copiar el archivo de requerimientos e instalar las dependencias
+# Esto se hace primero para aprovechar el cache de Docker si no cambian las dependencias
+COPY Back-end/GEV/requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copiar todo el código del proyecto Django al directorio de trabajo
+COPY Back-end/GEV/ .
+
+# El comando para correr la app se definirá en docker-compose.yml
+# Exponer el puerto que Gunicorn usará
+EXPOSE 8000
