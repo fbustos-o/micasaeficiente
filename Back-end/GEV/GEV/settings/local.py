@@ -14,7 +14,7 @@ load_dotenv()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
@@ -28,4 +28,3 @@ DATABASES = {
 }
 
 #STATIC_URL = 'funcion_u/static/'
-

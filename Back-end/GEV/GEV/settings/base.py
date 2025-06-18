@@ -12,11 +12,7 @@ SECRET_KEY = "django-insecure-%_5jg=7z(&ljq3hctnbc=#m=h%$t9!3pb-3r@*^7#aywi6qjy!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'https://preview.construct.net/'
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 BASE_APPS = [
@@ -42,7 +38,7 @@ THIRD_APPS = [
     #'simple_history', #libreria de almacenamiento de historiales.
     'drf_yasg', #another swagger generator
     'corsheaders',
-    'sslserver',
+    #'sslserver',
     #''
 ]
 
