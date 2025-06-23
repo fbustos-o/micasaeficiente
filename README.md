@@ -89,14 +89,20 @@ El front-end utiliza un archivo de configuración para saber dónde encontrar la
 
 2.  **Contenido del archivo**: Por defecto, el archivo está configurado para un entorno de desarrollo local.
     ```json
-    {"IP":"[http://127.0.0.1:8000](http://127.0.0.1:8000)"}
+    	{
+	"url_end_point": "https://localhost/mi_casa_eficiente",
+    	"url_iframe_3d": "https://localhost/casa_3d/"
+	}
     ```
 
-3.  **Modifícalo para producción**: Antes de construir la imagen de Docker para producción o de desplegar los archivos del front-end, debes cambiar el valor de `IP` por el dominio o la dirección IP pública de tu servidor de back-end.
+3.  **Modifícalo para producción**: Antes de construir la imagen de Docker para producción o de desplegar los archivos del front-end, debes cambiar el valor de `url_end_point` por el dominio o la dirección IP pública del servidor de back-end y el valor de la vivienda 3d: `url_iframe_3d`.
 
-    Por ejemplo, si tu back-end estará disponible en `https://api.micasaeficiente.com`, el archivo `url.json` debería verse así:
+    Por ejemplo, si tu back-end estará disponible en `https://api.micasaeficiente.com` y la casa 3D está en `https://api.micasaeficiente.com/casa3d`, el archivo `url.json` debería verse así:
     ```json
-    {"IP":"[https://api.micasaeficiente.com](https://api.micasaeficiente.com)"}
+    	{
+	"url_end_point": "https://api.micasaeficiente.com",
+    	"url_iframe_3d": "https://api.micasaeficiente.com/casa_3d/"
+	}
     ```
 
     > **Importante:** Después de modificar este archivo, si estás usando Docker, necesitarás reconstruir la imagen del front-end para que los cambios surtan efecto, usando el comando `docker-compose up --build`.
