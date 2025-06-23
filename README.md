@@ -1,136 +1,120 @@
 #  🚀 Mi Casa Eficiente
 ![image](https://github.com/user-attachments/assets/1ac1b78a-8dce-4496-a54a-b6bd3a1a2b4c)
+"Mi Casa Eficiente" es una aplicación web interactiva diseñada para ayudar a los usuarios a comprender y mejorar la eficiencia energética de sus hogares. La aplicación proporciona recomendaciones personalizadas y visualizaciones para reducir el consumo de energía.
 
-Breve manual de inatalación. 
+Este proyecto está dividido en un back-end desarrollado con Django y un front-end interactivo, ambos preparados para ser desplegados fácilmente utilizando Docker.
+Breve manual de instalación. 
 
 ## 📋 Pre-requisitos
-Antes de comenzar, asegúrate de tener instalado el siguiente software en tu sistema:
 
-Python 3.10 o superior
-PostgreSQL (el motor de base de datos) Versión 16.
+Asegúrate de tener instalados los siguientes programas en tu sistema:
+* [Docker](https://www.docker.com/get-started)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
+##  Estructura de Archivos
 
-### Paso 1: Configuración del back-end ⚙️
--------------------------------------
+El repositorio está organizado en las siguientes carpetas principales:
+```
+micasaeficiente/
+├── Back-end/
+│   └── GEV/            # Proyecto Django (Back-end)
+├── BBDD/               # Contiene los archivos CSV con los datos iniciales que se "autocargan" con docker.
+├── Front-end/
+│   ├── casa_3d/        # Visualización 3D (Unity WebGL)
+│   └── web-front/      # Aplicación principal del front-end
+├── docker-compose.yml  # Archivo para orquestar los contenedores de Docker
+└── nginx.conf          # Archivo de configuración para el proxy inverso Nginx
+```
 
-El back-end es el núcleo de la aplicación, desarrollado en Django. Gestiona la lógica de negocio, los cálculos y la API.
+* **`Back-end/GEV/`**: Contiene todo el código fuente del servidor, basado en el framework Django. Gestiona la lógica de negocio, las APIs y la interacción con la base de datos.
+* **`BBDD/`**: Almacena los datos iniciales del sistema en formato CSV. Estos archivos son cargados automáticamente en la base de datos durante el primer despliegue.
+* **`Front-end/`**: Contiene los componentes de la interfaz de usuario.
+* **`docker-compose.yml`**: Define los servicios que componen la aplicación (back-end, front-end y base de datos) y cómo se ejecutan e interconectan.
 
-#### **1: Configurar la Base de Datos PostgreSQL**
+##  Instalación y Puesta en Marcha
 
-1.  Abre una terminal de `psql` o usa una herramienta gráfica como pgAdmin.
-2.  Crea un nuevo usuario y una nueva base de datos para el proyecto. **Recuerda la contraseña que elijas.**
+Gracias a Docker, el proceso de instalación es sencillo y automatizado.
 
-    ```sql
-    CREATE DATABASE micasaeficiente_db;
-    CREATE USER micasaeficiente_user WITH PASSWORD 'tu_contraseña_segura';
-    GRANT ALL PRIVILEGES ON DATABASE micasaeficiente_db TO micasaeficiente_user;
-    ```
-
-#### **2: Preparar el Entorno del Proyecto**
-
-1.  Navega al directorio del back-end en tu terminal.
+1.  **Clona el Repositorio**
     ```bash
-    cd Back-end/GEV/
+    git clone [https://gitlab.minenergia.cl/sistemas/mi-casa-eficiente-v2/-/tree/version_3_docker](https://gitlab.minenergia.cl/sistemas/mi-casa-eficiente-v2/-/tree/version_3_docker)
+    cd micasaeficiente
     ```
-2.  Crea y activa un entorno virtual. Esto aísla las dependencias del proyecto.
-    * **Windows:**
-        ```bash
-        python -m venv venv
-        .\venv\Scripts\activate
-        ```
-    * **macOS / Linux:**
-        ```bash
-        python3 -m venv venv
-        source venv/bin/activate
-        ```
-3.  Instala todas las librerías necesarias.
+
+2.  **Levanta los Servicios con Docker Compose**
+    Abre una terminal en la raíz del proyecto y ejecuta el siguiente comando:
     ```bash
-    pip install -r requirements.txt
+    docker-compose up --build
+    ```
+    Este comando realiza las siguientes acciones:
+    * Construye las imágenes de Docker para los servicios de back-end y front-end.
+    * Inicia los contenedores para el back-end, el front-end y la base de datos PostgreSQL.
+    * Ejecuta las migraciones de la base de datos y la carga inicial de datos automáticamente (ver sección siguiente).
+
+3.  **Accede a la Aplicación**
+    Una vez que los contenedores estén en funcionamiento, podrás acceder a la aplicación desde tu navegador:
+    * **Front-end:** [http://localhost:80](http://localhost:80) o [http://127.0.0.1](http://127.0.0.1)
+    * **Back-end API:** [http://localhost:8000/api/](http://localhost:8000/api/)
+
+## Carga Automática de la Base de Datos
+
+Una de las principales ventajas de esta configuración es la automatización de la carga de datos. El servicio `back` en el archivo `docker-compose.yml` está configurado para ejecutar un comando especial al iniciar:
+
+**`docker-compose.yml`**
+```yaml
+services:
+  back:
+    # ...
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py load_initial_data && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./BBDD:/app/BBDD
+    # ...
+```
+
+Este comando asegura que, al levantar el contenedor:
+
+1. Se realicen y apliquen las migraciones de la base de datos (makemigrations y migrate).
+2. Se ejecute el script de gestión load_initial_data. Este script lee los archivos .csv de la carpeta BBDD/ (montada como un volumen dentro del contenedor) y puebla la base de datos PostgreSQL con toda la información necesaria para el funcionamiento de la aplicación, como comunas, perfiles de consumo, equipos y recomendaciones.
+No se requiere ninguna intervención manual para este proceso.
+
+## Configuración para Producción
+
+Cuando desees desplegar la aplicación en un servidor de producción, es crucial que el front-end se pueda comunicar con el back-end a través de una URL pública.
+
+### Edición del archivo `url.json`
+
+El front-end utiliza un archivo de configuración para saber dónde encontrar la API del back-end.
+
+1.  **Ubica el archivo**: Navega a `Front-end/web-front/url.json`.
+
+2.  **Contenido del archivo**: Por defecto, el archivo está configurado para un entorno de desarrollo local.
+    ```json
+    {"IP":"[http://127.0.0.1:8000](http://127.0.0.1:8000)"}
     ```
 
-#### **3: Configurar las Variables de Entorno**
+3.  **Modifícalo para producción**: Antes de construir la imagen de Docker para producción o de desplegar los archivos del front-end, debes cambiar el valor de `IP` por el dominio o la dirección IP pública de tu servidor de back-end.
 
-1.  En la raíz del back-end (`Back-end/GEV/`), crea un archivo llamado `.env`.
-2.  Añade la siguiente configuración al archivo `.env`, reemplazando los valores de la base de datos con los que creaste en el Paso 1.
+    Por ejemplo, si tu back-end estará disponible en `https://api.micasaeficiente.com`, el archivo `url.json` debería verse así:
+    ```json
+    {"IP":"[https://api.micasaeficiente.com](https://api.micasaeficiente.com)"}
+    ```
+
+    > **Importante:** Después de modificar este archivo, si estás usando Docker, necesitarás reconstruir la imagen del front-end para que los cambios surtan efecto, usando el comando `docker-compose up --build`.
+
+
+
+
+> **Importante:** en el backend hay que hacer un archivo .enw para posgres. Añade la siguiente configuración al archivo `.env`, a la dirección `Back-end\GEV\`
 
     ```env
     # Variables de entorno para Django
-    	DB_ENGINE='django.db.backends.postgresql_psycopg2'
+    DB_ENGINE='django.db.backends.postgresql_psycopg2'
 	DB_NAME='micasaeficiente_db'
 	DB_USER='micasaeficiente_user'
 	DB_PASSWORD='tu_contraseña_segura'
-	DB_HOST='127.0.0.1'
+	DB_HOST='db'
 	DB_PORT='5432'
     ```
-3.  **Importante**: Asegúrate de que el archivo `.env` esté incluido en tu `.gitignore` para no exponer tus credenciales.
-
-
-
-### Paso 2: Carga de datos en la BBDD
--------------------------------------
-#### **1: Crear las Tablas de la Base de Datos**
-
-Este comando leerá las migraciones de Django y creará la estructura de tablas en tu base de datos PostgreSQL.
-```bash
-python manage.py makemigrations 
-python manage.py migrate
-```
-
-#### **2: Carga inicial de datos (Carpeta BBDD -> archivos csv)
-Conéctate a tu base de datos con psql (revisa bien el nombre de la BBDD creada):
-```bash
-   psql -U micasaeficiente_user -d micasaeficiente_db
-```
-Ejecuta los siguientes comandos. Reemplaza '/ruta/completa/a/micasaeficiente/BBDD/' con la ruta real en tu sistema.
-
-```bash
-   \copy mi_casa_eficiente_comunazt(id, nombre, zt, region) FROM '/ruta/completa/a/micasaeficiente/BBDD/1_-_comuna_zt.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
-   \copy mi_casa_eficiente_perfilconsumo(id, tipo_perfil, tipo_vivienda, zona_termica, consumo_mensual_kwh, fuente) FROM '/ruta/completa/a/micasaeficiente/BBDD/2_-_perfilConsumoTipo.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
-   \copy mi_casa_eficiente_equipos(id, tipo_equipo, subtitulo, consumo_kwh, uso_promedio_diario_hrs, etiqueta, grupo, icono) FROM '/ruta/completa/a/micasaeficiente/BBDD/3_-_equipos.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
-   \copy mi_casa_eficiente_recomendaciones(id, recomendacion, detalle, tipo_equipo_asociado, ahorro_estimado_kwh) FROM '/ruta/completa/a/micasaeficiente/BBDD/4_-_recomendaciones.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
-   \copy mi_casa_eficiente_energeticosfenomeno(id, energetico, fenomeno, factor_conversion, unidad) FROM '/ruta/completa/a/micasaeficiente/BBDD/5_-_energetico_fenomeno.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
-   \copy mi_casa_eficiente_costoenergetico(id, energetico, empresa, cargo_fijo, precio_unitario, anio, mes, region) FROM '/ruta/completa/a/micasaeficiente/BBDD/6_-_costo_energetico.csv' WITH (FORMAT csv, HEADER true, DELIMITER ';');
-```
-
-### Paso 3:  Ejecutar el Servidor del Back-end
--------------------------------------
-Inicia el servidor de desarrollo:
-```bash
-   python manage.py runsslserver
-```
-
-El servicio de back-end estará disponible en `https://127.0.0.1:8000/`
-
-### Paso 4: Configuración del Front-end
--------------------------------------
-El front-end se ejecuta en servidores independientes. Necesitarás dos terminales adicionales.
-
-#### Paso 1: Ejecutar la Visualización 3D (Esta alojado dentro del servicio principal del proximo paso)
-1. Abre una tercera terminal.
-2. Navega a la carpeta Front-end/:
-   cd Front-end/
-3. Ejecuta el servidor dedicado:
-   python servidor_casa_3d.py
-4. El componente 3D estará disponible en `https://localhost:8001` (para cambiar el puerto y la dirección, se debe editar el archivo `servidor_casa_3d.py`)
-
-#### Paso 2: Ejecutar la Aplicación Web Principal
-1. Abre una nueva terminal.
-2. Navega a la carpeta Front-end/:
-   cd Front-end/
-3. Ejecuta el servidor:
-   python servidor_https.py
-4. La aplicación web estará accesible en `https://localhost:4443` (para cambiar el puerto y la dirección, se debe editar el archivo `servidor_htpps.py`)
-
-
-### Paso 5: primer uso de la plataforma
--------------------------------------
-Para utilizar la aplicación con esta configuración se debe verificar que el archivo `url.json` que se encuentra en: `\Front-end\web-front\` se encuentre debidamente configurado, es decir que tenga la siguientes urls:
-```bash
-{
-	"url_end_point": "https://127.0.0.1:8000/mi_casa_eficiente",
-	"url_iframe_3d": "https://127.0.0.1:8001/"
-}
-```
 
 
 -------------------------------------
