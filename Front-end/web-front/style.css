@@ -113,3 +113,31 @@ html[ioswebview] .c3htmlwrap > * {
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
 }
+
+/* Estilos para el consumo actual */
+#current-consumption-display {
+    position: absolute;
+    top: 10%; /* Ajusta según la posición de tu barra de calificación */
+    right: 10%; /* Ajusta para alinear a la derecha de la barra */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+/* Estilos para el puntero */
+#energy-rating-pointer {
+    position: absolute;
+    top: 20%; /* Ajusta para que esté debajo del texto de consumo */
+    left: var(--pointer-position); /* Usará la variable CSS establecida en JS */
+    transform: translateX(-50%); /* Centra la flecha en su posición */
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid black; /* Color de la flecha */
+    z-index: 1000;
+}

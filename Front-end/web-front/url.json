@@ -1,4 +1,4 @@
 {
-	"url_end_point": "https://localhost/mi_casa_eficiente",
-    "url_iframe_3d": "https://localhost/casa_3d/"
+	"url_end_point": "https://localhost:4453/mi_casa_eficiente",
+    "url_iframe_3d": "https://localhost:4453/casa_3d/"
 }

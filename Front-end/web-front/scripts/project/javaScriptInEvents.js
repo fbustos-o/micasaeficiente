@@ -1,5 +1,3 @@
-
-
 const scriptsInEvents = {
 
 	async EventSheet7_Event3(runtime, localVars)
@@ -541,14 +539,45 @@ function recorrerJSON(data) {
     });
 
     runtime.globalVars.KWhAnual = parseInt(runtime.globalVars.KWhAnual);
-    console.log("\nLista de recomendaciones:");
+    console.log("Lista de recomendaciones:");
 
     runtime.globalVars.dda_energia_max =  parseInt(data.dda_energia_max);
     runtime.callFunction("ActualizarBarra", 0);
 
+   /*
+    * Tarea 1: Corregir la visualización inicial del "Consumo actual".
+    * -------------------------------------------------------------
+    * Se realiza una segunda llamada a `ActualizarBarra` con el valor del consumo
+    * actual (`runtime.globalVars.dda_energia_max`) para posicionar el marcador
+    * correctamente en la primera carga de la página de recomendaciones.
+    * Anteriormente, el marcador solo aparecía después de navegar a la pantalla
+    * final y volver atrás.
+    */
+   runtime.callFunction("ActualizarBarra", runtime.globalVars.dda_energia_max);
+
+   /*
+    * Tarea 2: Ajustar el rango de la escala de eficiencia para "A+".
+    * --------------------------------------------------------------
+    * Para que la escala de eficiencia comience en 2000 kWh/año en lugar de 0,
+    * es necesario modificar la lógica interna de la función `ActualizarBarra`
+    * en el editor de Construct. No es posible realizar este cambio directamente
+    * desde aquí, ya que la función es parte de la lógica visual del motor.
+    *
+    * Modificación sugerida en el Event Sheet de Construct:
+    * La fórmula que calcula la posición del marcador debe ajustarse.
+    * Por ejemplo, si la fórmula actual es:
+    *   (valor / max_valor) * ancho_escala
+    * Debería cambiarse a algo similar a:
+    *   ((valor - 2000) / (max_valor - 2000)) * ancho_escala
+    *
+    * Es importante asegurarse de que los valores de consumo inferiores a 2000
+    * se traten como 2000 para evitar posiciones negativas en la barra (clamp).
+    */
+
 
     data.lista_recomendaciones.forEach((grupo, index) => {
-        console.log(`\nGrupo de uso ${index + 1}: ${grupo.grupo_uso} (ID: ${grupo.grupo_uso_id})`);
+        console.log(`
+Grupo de uso ${index + 1}: ${grupo.grupo_uso} (ID: ${grupo.grupo_uso_id})`);
 
         var index2 = 0;
 
@@ -580,7 +609,8 @@ function recorrerJSON(data) {
             console.log(`  Inversión ID: ${inversionId}`);
             console.log(`  Inversión: ${inversion}`);
             console.log(`  Ahorro EE ID: ${ahorroEeId}`);
-            console.log(`  Ahorro estimado: ${ahorroEe}\n`);*/
+            console.log(`  Ahorro estimado: ${ahorroEe}
+`);*/
 
             index2++;
         });

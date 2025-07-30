@@ -1616,7 +1616,32 @@ self.C3_ExpressionFuncs = [
 			const v4 = p._GetNode(4).GetVar();
 			const v5 = p._GetNode(5).GetVar();
 			const v6 = p._GetNode(6).GetVar();
-			return () => (v0.GetValue() + (((v1.GetValue() - v2.GetValue()) / (v3.GetValue() - v4.GetValue())) * (v5.GetValue() - v6.GetValue())));
+			/*
+			 * NOTA DE MODIFICACIÓN MANUAL:
+			 * El siguiente bloque de código fue alterado para ajustar la escala de eficiencia.
+			 * Para que la escala de eficiencia comience en 1500 kWh/año en lugar de 0,
+			 * es necesario modificar la lógica interna de la función `ActualizarBarra`
+			 * en el editor de Construct. No es posible realizar este cambio directamente
+			 * desde javaScriptInEvents.js, ya que la función es parte de la lógica visual del motor.
+			 *
+			 * Modificación sugerida en el Event Sheet de Construct:
+			 * La fórmula que calcula la posición del marcador debe ajustarse.
+			 * Por ejemplo, si la fórmula actual es:
+			 * (valor / max_valor) * ancho_escala
+			 * Debería cambiarse a algo similar a:
+			 * ((valor - 1500) / (max_valor - 1500)) * ancho_escala
+			 *
+			 * Es importante asegurarse de que los valores de consumo inferiores a 1500
+			 * se traten como 1500 para evitar posiciones negativas en la barra (clamp).
+			*/
+			return () => {
+				const RANGO_MINIMO_ESCALA = 1500;
+				let valorConsumo = v1.GetValue();
+				let valorParaEscala = Math.max(valorConsumo, RANGO_MINIMO_ESCALA);
+				let valorMaximo = v3.GetValue();
+				let proporcion = (valorParaEscala - RANGO_MINIMO_ESCALA) / (valorMaximo - RANGO_MINIMO_ESCALA);
+				return v0.GetValue() + ((proporcion * (v5.GetValue() - v6.GetValue())) + (v2.GetValue() - v4.GetValue()));
+			};
 		},
 		() => "Casa_con_flechas",
 		() => "Calefaccion",
