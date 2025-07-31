@@ -4,7 +4,7 @@ import os
 
 # --- Configuración ---
 DIRECCION_SERVIDOR = "127.0.0.1"  # Escucha en todas las interfaces disponibles
-PUERTO_SERVIDOR = 8080        # Puerto para HTTPS (puedes cambiarlo si lo deseas)
+PUERTO_SERVIDOR = 8082        # Puerto para HTTPS (puedes cambiarlo si lo deseas)
 DIRECTORIO_A_SERVIR = "casa_3d" # Nombre de la carpeta que contiene tu proyecto
 ARCHIVO_CERTIFICADO = "cert.pem" # Nombre de tu archivo de certificado
 ARCHIVO_CLAVE = "key.pem"       # Nombre de tu archivo de clave privada
