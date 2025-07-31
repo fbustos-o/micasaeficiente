@@ -1,5 +1,7 @@
 #  🚀 Mi Casa Eficiente
 ![image](https://github.com/user-attachments/assets/1ac1b78a-8dce-4496-a54a-b6bd3a1a2b4c)
+
+
 "Mi Casa Eficiente" es una aplicación web interactiva diseñada para ayudar a los usuarios a comprender y mejorar la eficiencia energética de sus hogares. La aplicación proporciona recomendaciones personalizadas y visualizaciones para reducir el consumo de energía.
 
 Este proyecto está dividido en un back-end desarrollado con Django y un front-end interactivo, ambos preparados para ser desplegados fácilmente utilizando Docker.
