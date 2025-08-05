@@ -1,7 +1,5 @@
 #  🚀 Mi Casa Eficiente
 ![image](https://github.com/user-attachments/assets/1ac1b78a-8dce-4496-a54a-b6bd3a1a2b4c)
-
-
 "Mi Casa Eficiente" es una aplicación web interactiva diseñada para ayudar a los usuarios a comprender y mejorar la eficiencia energética de sus hogares. La aplicación proporciona recomendaciones personalizadas y visualizaciones para reducir el consumo de energía.
 
 Este proyecto está dividido en un back-end desarrollado con Django y un front-end interactivo, ambos preparados para ser desplegados fácilmente utilizando Docker.
@@ -55,8 +53,8 @@ Gracias a Docker, el proceso de instalación es sencillo y automatizado.
 
 3.  **Accede a la Aplicación**
     Una vez que los contenedores estén en funcionamiento, podrás acceder a la aplicación desde tu navegador:
-    * **Front-end:** [http://localhost:80](http://localhost:80) o [http://127.0.0.1](http://127.0.0.1)
-    * **Back-end API:** [http://localhost:8000/api/](http://localhost:8000/api/)
+    * **Front-end:** [http://localhost:4453](http://localhost:4453) o [http://127.0.0.1](http://127.0.0.1)
+    * **Back-end API:** [http://localhost:4453/mi_casa_eficiente/](http://localhost:8000/api/)
 
 ## Carga Automática de la Base de Datos
 
@@ -1162,4 +1160,5 @@ consulta de recomendaciones completa:
 4. (Opcional) Editar consumos: Si indicaste que conoces tus consumos, realiza una solicitud PUT a `/mi_casa_eficiente/edita_consumo/&lt;int:pk&gt;` con los datos de consumo.
 5. Indicar si deseas editar equipos: Realiza una solicitud POST a `/mi_casa_eficiente/equipos/<int:pk>` con `{"edita_equipos": true}` o `{"edita_equipos": false}`.
 6. (Opcional) Editar equipos: Si indicaste que deseas editar los equipos, realiza una solicitud PUT a `/mi_casa_eficiente/edita_equipos/<int:pk>` con los datos de los equipos.
+
 7. Obtener recomendaciones: Realiza una solicitud GET a `/mi_casa_eficiente/recomendaciones/<int:pk>` para recibir las recomendaciones de eficiencia energética.
