@@ -21,4 +21,4 @@ COPY Back-end/GEV/ .
 
 # El comando para correr la app se definirá en docker-compose.yml
 # Exponer el puerto que Gunicorn usará
-EXPOSE 8000
+EXPOSE 8082

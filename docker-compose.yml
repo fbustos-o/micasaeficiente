@@ -51,8 +51,8 @@ services:
       dockerfile: Dockerfile.frontend
     container_name: micasa_frontend
     ports:
-      - "80:80"
-      - "443:443"
+      - "8082:80"
+      - "4453:443"
     volumes:
       # Sintaxis: <ruta_en_tu_pc>:<ruta_en_el_contenedor>
       - ./Front-end/cert.pem:/etc/nginx/ssl/cert.pem
@@ -62,7 +62,7 @@ services:
       - backend
     restart: unless-stopped
 
-# --- DEFINICIÓN DE VOLÚMENES ---
+# --- DEFINICIÓN DE VOLUMENES ---
 # Aquí se define el volumen para persistir los datos de PostgreSQL.
 volumes:
   postgres_data:
