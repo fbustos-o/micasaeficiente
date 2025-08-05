@@ -16,3 +16,7 @@ option{
 .c3htmlwrap{
     display: block !important;
 }
+
+.TextRecomendacionFin {
+    font-size: 120% !important;
+}

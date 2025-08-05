@@ -580,7 +580,7 @@ function recorrerJSON(data) {
 Grupo de uso ${index + 1}: ${grupo.grupo_uso} (ID: ${grupo.grupo_uso_id})`);
 
         var index2 = 0;
-
+        grupo.recomendaciones.sort((a, b) => a.id - b.id);
         grupo.recomendaciones.forEach((recomendacion) => {
             // Guardando los valores en variables
 
@@ -600,7 +600,7 @@ Grupo de uso ${index + 1}: ${grupo.grupo_uso} (ID: ${grupo.grupo_uso_id})`);
 			runtime.callFunction("FunctionAddRecomendacion", index2, grupo.grupo_uso_id, id, grupoUsoId, grupoUso, grupoUsoCorto, imagenTarjeta, textoRecomendacion, inversionId, inversion, ahorroEeId, ahorroEe);
 
             // Mostrando los valores en la consola
-            /*console.log(`- ID: ${id}`);
+            console.log(`- ID: ${id}`);
             console.log(`  Grupo Uso ID: ${grupoUsoId}`);
             console.log(`  Grupo Uso: ${grupoUso}`);
             console.log(`  Uso corto: ${grupoUsoCorto}`);
@@ -610,7 +610,7 @@ Grupo de uso ${index + 1}: ${grupo.grupo_uso} (ID: ${grupo.grupo_uso_id})`);
             console.log(`  Inversión: ${inversion}`);
             console.log(`  Ahorro EE ID: ${ahorroEeId}`);
             console.log(`  Ahorro estimado: ${ahorroEe}
-`);*/
+`);
 
             index2++;
         });

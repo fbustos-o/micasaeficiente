@@ -676,7 +676,7 @@ window.RateLimiter = class {
             if (this._exportType === "cordova") {
                 document.addEventListener("deviceready", () => this._Init(opts));
             } else {
-                this._Init(opts);
+                window.addEventListener("load", () => this._Init(opts));
             }
             this._skipAndroidVirtualKeyboardDetection = 0;
         }
@@ -1035,6 +1035,12 @@ window.RateLimiter = class {
             this._OnBeforeCreateRuntime();
             this._localRuntime = self["C3_CreateRuntime"](runtimeOpts);
             await self["C3_InitRuntime"](this._localRuntime, runtimeOpts);
+
+            // HACK: Forzar la reanudación despachando un evento de cambio de visibilidad.
+            // Esto soluciona el problema de la pantalla en blanco en iframes.
+            setTimeout(() => {
+                document.dispatchEvent(new Event('visibilitychange'));
+            }, 500);
         }
         
         async CreateWorker(url, options) {
