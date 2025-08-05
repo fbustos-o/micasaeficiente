@@ -830,24 +830,45 @@ class resultadosSerializer(serializers.ModelSerializer):
         for medida in id_medidas:
             medidas_dict[medida] = recomendaciones.objects.filter(id=medida).values()
         
-        # puntajes por grupo uso:
-        id_equipos_seleccionados = list(instance['equipos_seleccionados'].keys())
+        # 1. Agrupar la información por 'grupo_uso_id' para obtener los totales de energía
+        #    y conteos de elementos de forma consistente con el paso 4.
+        datos_por_grupo_id = {}
+        for equipo_data in instance['equipos_seleccionados'].values():
+            grupo_id = equipo_data.get('grupo_uso_id')
+            if grupo_id not in datos_por_grupo_id:
+                datos_por_grupo_id[grupo_id] = {
+                    'suma_energia': 0,
+                    'cantidad_elementos': 0,
+                    'nombre_grupo': "Grupo Desconocido" # Valor por defecto
+                }
+            datos_por_grupo_id[grupo_id]['suma_energia'] += equipo_data.get('promedio_energia_anual', 0)
+            datos_por_grupo_id[grupo_id]['cantidad_elementos'] += 1
+
+        # 2. Obtener los nombres correctos para cada 'grupo_uso_id' desde la tabla de recomendaciones,
+        #    que es la fuente de verdad para los nombres de las categorías.
+        ids_unicos = datos_por_grupo_id.keys()
+        nombres_reales = recomendaciones.objects.filter(grupo_uso_id__in=ids_unicos).values('grupo_uso_id', 'grupo_uso_corto').distinct()
+        
+        mapa_id_nombre = {item['grupo_uso_id']: item['grupo_uso_corto'] for item in nombres_reales}
+
+        # 3. Construir el diccionario final 'resumen_desempeno' combinando los datos.
         resumen_desempeno = {}
-        for equipo_id in id_equipos_seleccionados:
-            equipo_data = instance['equipos_seleccionados'][equipo_id]
-            grupo = equipo_data['grupo_uso_corto']
-            energia = equipo_data['promedio_energia_anual']
+        suma_desempeno = 0
+        for grupo_id, data in datos_por_grupo_id.items():
+            nombre_final = mapa_id_nombre.get(grupo_id, data['nombre_grupo'])
+            resumen_desempeno[nombre_final] = {
+                'cantidad_elementos': data['cantidad_elementos'],
+                'suma_energia': data['suma_energia'],
+                'puntaje': 0 # Se calculará después
+            }
+            suma_desempeno += data['suma_energia']
 
-            if grupo not in resumen_desempeno:
-                resumen_desempeno[grupo] = {'cantidad_elementos': 0, 'suma_energia': 0, 'puntaje': 0} # Initialize count and energy sum
-
-            resumen_desempeno[grupo]['cantidad_elementos'] += 1
-            resumen_desempeno[grupo]['suma_energia'] += energia
-        
-        suma_desempeno = sum(resumen_desempeno[grupo]['suma_energia'] for grupo in resumen_desempeno)
-        
-        for grupo in resumen_desempeno:
-            resumen_desempeno[grupo]['puntaje'] = math.ceil(resumen_desempeno[grupo]['suma_energia']/(suma_desempeno) * 5)
+        # 4. Calcular los puntajes para cada categoría.
+        for grupo, data in resumen_desempeno.items():
+            if suma_desempeno > 0:
+                data['puntaje'] = math.ceil(data['suma_energia'] / suma_desempeno * 5)
+            else:
+                data['puntaje'] = 0
         
         resumen_previo = {
             'id' : instance['id'],
@@ -867,15 +888,7 @@ class resultadosSerializer(serializers.ModelSerializer):
             'Medidas seleccionadas': medidas_dict,
         }
         resultado_medidas = calcular_resultados_medidas(resumen_previo)
-        #FIX: AGREGAR ORDEN POR INVERSIÓN Y EE
-        #datos de resultados de medidas seleccionadas //VALORES A RESOLVER AUN
-        '''
-        resultado_medidas = {
-            'eficiencia_energética': [12, 35],
-            'Ahorro anual potencial de Energía': [4500, 15500],
-            #'Emisiones anuales evitadas estimadas': [1, 4] # PENDIENTE
-        }
-        '''
+        
         resultados = {
             'id' : instance['id'],
             'id_comuna' : instance['id_comuna'],
@@ -943,7 +956,7 @@ def reorganizar_lista_recomendaciones(lista_recomendaciones):
             "recomendaciones": recomendaciones
         })
     return nueva_lista_recomendaciones
-
+   
 def calcular_resultados_medidas(data):
     """
     Calcula resultados estimados de eficiencia energética basados en las medidas seleccionadas.
@@ -957,29 +970,19 @@ def calcular_resultados_medidas(data):
     # 1. Extraer secciones relevantes del diccionario
     medidas_seleccionadas = data.get("Medidas seleccionadas", {})
     resumen_desempeno = data.get("Resumen_desempeno", {})
-    emisiones_perfil = data.get("Emisiones_total", {}) # Extraer emisiones
+    emisiones_perfil = data.get("Emisiones_total", {})
+    costos_energia = data.get("Costo_consumo_anual", {})
     
-    # 2. Mapear grupo_uso_id a categorías en Resumen_desempeno
-    # basado en el grupo_uso_corto que aparece en las medidas
-    mapeo_grupo_categoria = {}
-    
-    # Construir mapeo dinámicamente a partir de las medidas disponibles
-    for medida_id, detalles_medidas in medidas_seleccionadas.items():
-        for medida in detalles_medidas:
-            grupo_uso_id = medida.get("grupo_uso_id")
-            grupo_uso_corto = medida.get("grupo_uso_corto")
-            if grupo_uso_id and grupo_uso_corto:
-                mapeo_grupo_categoria[grupo_uso_id] = grupo_uso_corto
-    
-    # 3. Definir porcentajes de ahorro según ahorro_ee_id
+    # 2. Definir porcentajes de ahorro según ahorro_ee_id
     rangos_ahorro = {
         1: (0, 5),     # Nivel 1: menos del 5%
         2: (5, 15),    # Nivel 2: entre 5% y 15% 
         3: (15, 30),   # Nivel 3: entre 15% y 30%
-        4: (30, 50)    # Nivel 4: entre 30% y 50%
+        4: (30, 50),    # Nivel 4: entre 30% y 50%
+        5: (50, 60)     # Nivel 5: más del 50%
     }
     
-    # 4. Definir valores y mapeo de texto para inversión
+    # 3. Definir valores y mapeo de texto para inversión
     niveles_inversion = {
         1: 1,   # Nula
         2: 2,   # Baja
@@ -993,102 +996,83 @@ def calcular_resultados_medidas(data):
         4: "Alta"
     }
     
-    # 5. Inicializar variables para cálculos
+    # 4. Agrupar ahorros y costos de inversión por categoría (grupo_uso_corto)
     impactos_por_categoria = {}
-    total_energia = 0
-    total_inversiones_valor = 0 # Usar un nombre diferente para la suma de valores numéricos
+    total_inversiones_valor = 0
     numero_medidas = 0
-    
-    # 6. Calcular el total de energía considerada en el resumen de desempeño
-    for categoria, datos in resumen_desempeno.items():
-        energia = datos.get("suma_energia", 0)
-        total_energia += energia
-    
-    # 7. Procesar cada medida seleccionada
+
     for medida_id, detalles_medidas in medidas_seleccionadas.items():
         for medida in detalles_medidas:
             numero_medidas += 1
-            
-            # Extraer información relevante de la medida
-            grupo_uso_id = medida.get("grupo_uso_id")
+            grupo_uso_corto = medida.get("grupo_uso_corto")
             ahorro_ee_id = medida.get("ahorro_ee_id")
             inversion_id = medida.get("inversion_id")
-            
-            # Obtener la categoría correspondiente
-            categoria = mapeo_grupo_categoria.get(grupo_uso_id)
-            
-            # Si la categoría existe en el resumen de desempeño
-            if categoria and categoria in resumen_desempeno:
-                # Obtener la energía asociada a esta categoría
-                energia_categoria = resumen_desempeno[categoria].get("suma_energia", 0)
-                
-                # Registrar el impacto potencial de esta medida
-                if categoria not in impactos_por_categoria:
-                    impactos_por_categoria[categoria] = {
-                        "energia": energia_categoria,
-                        "ahorros": []
-                    }
-                
-                # Agregar el rango de ahorro para esta medida
-                rango_ahorro = rangos_ahorro.get(ahorro_ee_id, (0, 0))
-                impactos_por_categoria[categoria]["ahorros"].append(rango_ahorro)
-                
-                # Sumar el valor numérico de la inversión
-                total_inversiones_valor += niveles_inversion.get(inversion_id, 0)
-    
-    # 8. Calcular rangos de ahorro ponderados
-    ahorro_min_ponderado = 0
-    ahorro_max_ponderado = 0
-    ahorro_promedio_ponderado = 0 # Inicializar
-    
-    if total_energia > 0: # Evitar división por cero
-        for categoria, datos in impactos_por_categoria.items():
-            energia_categoria = datos["energia"]
-            peso_categoria = energia_categoria / total_energia
-            
-            # Calcular el promedio de los rangos de ahorro para esta categoría
-            ahorros = datos["ahorros"]
-            if ahorros:
-                min_promedio = sum(min_val for min_val, _ in ahorros) / len(ahorros)
-                max_promedio = sum(max_val for _, max_val in ahorros) / len(ahorros)
-                
-                # Aplicar ponderación
-                ahorro_min_ponderado += min_promedio * peso_categoria
-                ahorro_max_ponderado += max_promedio * peso_categoria
-        
-        if impactos_por_categoria: # Asegurarse de que hubo impactos para calcular el promedio
-             ahorro_promedio_ponderado = (ahorro_min_ponderado + ahorro_max_ponderado) / 2
 
-    # 9. Calcular ahorro monetario potencial
-    costos_energia = data.get("Costo_consumo_anual", {})
+            if grupo_uso_corto:
+                if grupo_uso_corto not in impactos_por_categoria:
+                    impactos_por_categoria[grupo_uso_corto] = {"ahorros": []}
+                
+                rango = rangos_ahorro.get(ahorro_ee_id, (0, 0))
+                impactos_por_categoria[grupo_uso_corto]["ahorros"].append(rango)
+
+            total_inversiones_valor += niveles_inversion.get(inversion_id, 0)
+    # 5. Calcular el ahorro energético total sumando los ahorros de cada categoría
+    ahorro_energia_min_total = 0
+    ahorro_energia_max_total = 0.
+    
+    for categoria, impactos in impactos_por_categoria.items():
+        if categoria in resumen_desempeno and impactos["ahorros"]:
+            energia_categoria = resumen_desempeno[categoria].get("suma_energia", 0)
+            # INICIALIZAR LA SUMA DE PORCENTAJES PARA LA CATEGORÍA
+            ahorro_min_sumado_cat = 0
+            ahorro_max_sumado_cat = 0
+            
+            # SE SUMAN LOS PORCENTAJES DE AHORRO DE TODAS LAS MEDIDAS SELECCIONADAS EN LA CATEGORÍA
+            for rango_ahorro_medida in impactos["ahorros"]:
+                ahorro_min_sumado_cat += rango_ahorro_medida[0]
+                ahorro_max_sumado_cat += rango_ahorro_medida[1]
+
+            # SE APLICA EL TOPE MÁXIMO DE AHORRO DEL 80% A LA SUMA TOTAL DE PORCENTAJES
+            porcentaje_ahorro_min_final = min(ahorro_min_sumado_cat, 80)
+            porcentaje_ahorro_max_final = min(ahorro_max_sumado_cat, 80)
+
+            # CALCULAR EL AHORRO DE ENERGÍA PARA LA CATEGORÍA, USANDO LOS PORCENTAJES ACUMULADOS Y CON TOPE
+            ahorro_energia_min_total += energia_categoria * (porcentaje_ahorro_min_final / 100)
+            ahorro_energia_max_total += energia_categoria * (porcentaje_ahorro_max_final / 100)
+
+    # 6. Calcular el porcentaje de eficiencia energética total
+    total_energia = sum(datos.get("suma_energia", 0) for datos in resumen_desempeno.values())
+    ahorro_min_ponderado = (ahorro_energia_min_total / total_energia) * 100 if total_energia > 0 else 0
+    ahorro_max_ponderado = (ahorro_energia_max_total / total_energia) * 100 if total_energia > 0 else 0
+    # 7. Calcular ahorro monetario potencial
     costo_total = sum(costos_energia.values())
     
-    ahorro_min = (ahorro_min_ponderado / 100) * costo_total
-    ahorro_max = (ahorro_max_ponderado / 100) * costo_total
-    ahorro_promedio = (ahorro_min + ahorro_max) / 2
-    
-    # 10. Calcular nivel de inversión promedio y su valor textual
+    ahorro_min_monetario = (ahorro_min_ponderado / 100) * costo_total
+    ahorro_max_monetario = (ahorro_max_ponderado / 100) * costo_total
+    ahorro_promedio_monetario = (ahorro_min_monetario + ahorro_max_monetario) / 2
+
+    # 8. Calcular nivel de inversión promedio y su valor textual
     nivel_inversion_promedio = 0
     valor_inversion_texto = "N/A" # Valor por defecto
     if numero_medidas > 0:
         nivel_inversion_promedio = total_inversiones_valor / numero_medidas
-        # Redondear hacia arriba y asegurar que esté entre 1 y 4
         inversion_entero = min(max(math.ceil(nivel_inversion_promedio), 1), 4) 
         valor_inversion_texto = mapeo_inversion_texto.get(inversion_entero, "Desconocida")
 
-    # 11. Calcular emisiones totales
+    # 9. Calcular emisiones totales y ahorro energético promedio
     total_emisiones = sum(emisiones_perfil.values())
+    ahorro_energetico_promedio = (ahorro_energia_min_total + ahorro_energia_max_total) / 2
 
-    # 12. Construir el diccionario de resultados
+    # 10. Construir el diccionario de resultados
     resultados = {
         "eficiencia_energetica": [round(ahorro_min_ponderado, 1), round(ahorro_max_ponderado, 1)],
-        "ahorro_energetico": [total_energia * (ahorro_min_ponderado / 100), total_energia * (ahorro_max_ponderado / 100)],
-        "ahorro_energetico_promedio": total_energia * (ahorro_promedio_ponderado / 100),
-        "ahorro_potencial_monetario": [round(ahorro_min), round(ahorro_max)],
-        "ahorro_promedio_monetario": round(ahorro_promedio),
+        "ahorro_energetico": [ahorro_energia_min_total, ahorro_energia_max_total],
+        "ahorro_energetico_promedio": ahorro_energetico_promedio,
+        "ahorro_potencial_monetario": [round(ahorro_min_monetario), round(ahorro_max_monetario)],
+        "ahorro_promedio_monetario": round(ahorro_promedio_monetario),
         "inversion_total": round(nivel_inversion_promedio, 1),
-        "valor_inversion": valor_inversion_texto, # Agregar valor textual
-        "emisiones": round(total_emisiones, 2) # Agregar emisiones totales redondeadas
+        "valor_inversion": valor_inversion_texto,
+        "emisiones": round(total_emisiones, 2)
     }
     
     return resultados
