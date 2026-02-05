@@ -1,115 +1,147 @@
-# Mi Casa Eficiente (MCE) - V16
+# 🏡 Mi Casa Eficiente (MCE)
 
-**Mi Casa Eficiente** es una aplicación web integral diseñada para realizar calificaciones energéticas de viviendas. Permite a los usuarios estimar la demanda energética de su hogar, detallar sus equipos y recibir recomendaciones personalizadas para mejorar la eficiencia energética, todo a través de una interfaz interactiva y fácil de usar.
+**Mi Casa Eficiente** es una herramienta web interactiva diseñada para realizar auditorías energéticas residenciales simplificadas. Su objetivo es permitir a los usuarios identificar oportunidades de ahorro energético y económico en sus hogares mediante un flujo guiado de diagnóstico y simulación de mejoras.
+
+## 📋 Descripción del Proyecto
+
+El sistema funciona como una *Single Page Application* (SPA) que guía al usuario a través de 7 pasos lógicos para determinar el perfil energético de su vivienda. Utiliza datos climáticos geolocalizados, perfiles de consumo tipo y un inventario de equipos para calcular una "Demanda Base" y compararla con el consumo real.
+
+### Flujo de Funcionamiento
+1.  **Ubicación:** Selección de Región, Comuna y Clima (Costa, Valle, Cordillera). Determina la zona térmica.
+2.  **Vivienda:** Definición de tipología (Casa/Depto), superficie, antigüedad y características constructivas.
+3.  **Energéticos:** Selección de fuentes de energía utilizadas (Electricidad, Gas, Leña, Pellet, etc.).
+4.  **Consumo (La Boleta):** Cálculo automático del consumo teórico vs. ingreso manual de boletas reales para calibrar el modelo.
+5.  **Inventario de Equipos:** Desglose detallado de equipos por habitación (iluminación, calefacción, agua caliente) para distribuir el consumo total.
+6.  **Recomendaciones:** Simulación interactiva donde el usuario selecciona mejoras (ej: Ventanas Termopanel, Aislación) y ve el impacto en tiempo real.
+7.  **Resultados:** Reporte final con ahorro monetario estimado, reducción de huella de carbono (CO2) y equivalencias ambientales.
 
 ---
 
-## 🚀 Arquitectura del Proyecto
+## 🛠️ Stack Tecnológico
 
-El sistema utiliza una arquitectura de microservicios contenerizada con Docker, garantizando un despliegue sencillo y consistente.
+La arquitectura está basada en microservicios contenerizados con Docker.
 
-*   **Frontend**: Servido por **Nginx**. Contiene la aplicación web (HTML, CSS, JS plano) que interactúa con el usuario. Maneja certificados SSL para navegación segura (HTTPS).
-*   **Backend**: Construido con **Django** y **Django REST Framework**. Procesa la lógica de negocio, realiza los cálculos energéticos y gestiona la API.
-*   **Base de Datos**: **MariaDB**. Almacena la información de comunas, datos climáticos, inventario de equipos y las sesiones de los usuarios.
+* **Frontend:**
+    * HTML5, Vanilla JavaScript (ES6+).
+    * **Tailwind CSS** (Estilos y diseño responsivo).
+    * **Highcharts** (Visualización de datos y gráficos).
+    * Servidor Web: **Nginx**.
+* **Backend:**
+    * **Python 3.11** + **Django 5.x**.
+    * **Django REST Framework** (API RESTful).
+    * Servidor de Aplicación: **Gunicorn**.
+* **Base de Datos:**
+    * **MariaDB 10.11**.
+* **Infraestructura:**
+    * **Docker** & **Docker Compose**.
 
 ---
 
-## 🛠️ Requisitos e Instalación
+## 🚀 Guía de Instalación y Despliegue
 
-### Pre-requisitos
-*   [Docker Desktop](https://www.docker.com/products/docker-desktop) instalado y ejecutándose.
+Sigue estos pasos para montar el proyecto en tu entorno local.
 
-### Pasos para Ejecutar
+### Prerrequisitos
+* Tener instalado [Docker](https://www.docker.com/get-started) y [Docker Compose](https://docs.docker.com/compose/install/).
 
-1.  **Ubicarse en la carpeta raíz** del proyecto (`MCE`).
-2.  **Iniciar los servicios**:
-    Abre una terminal (PowerShell o CMD) y ejecuta:
+### 1. Clonar el Repositorio
+Descarga el código fuente en tu máquina y navega a la carpeta raíz.
+
+### 2. Verificar Certificados SSL (Entorno Local)
+El servicio de Frontend (Nginx) está configurado para servir tanto HTTP como HTTPS. Asegúrate de que existan los archivos de certificado en la ruta `./Front-end/`. Si no tienes certificados reales, el contenedor podría fallar o necesitas generarlos/u omitir el montaje SSL en el `docker-compose.yml`.
+* Ruta esperada: `./Front-end/cert.pem` y `./Front-end/key.pem`
+
+### 3. Levantar los Contenedores
+Ejecuta el siguiente comando en la terminal (en la raíz donde está el `docker-compose.yml`):
+
+```bash
+docker-compose up --build -d
+```
+
+Este comando realizará automáticamente:
+1.  Levantará la base de datos **MariaDB**.
+2.  Construirá la imagen del **Backend**, ejecutará las migraciones (`migrate`) y **cargará los datos iniciales** necesarios (comunas, equipos, recomendaciones) mediante el script `load_initial_data`.
+3.  Levantará el servidor **Nginx** para el frontend.
+
+### 4. Acceder a la Aplicación
+
+Una vez que los contenedores estén corriendo (puedes verificar con `docker ps`), accede a:
+
+* **Aplicación Web (Frontend):** [http://localhost:8082](http://localhost:8082)
+* **Panel de Administración (Backend):** [http://localhost:8000/admin](http://localhost:8000/admin) (Nota: El puerto 8000 debe estar expuesto en el compose si deseas acceder directamente, o via Nginx si está configurado el proxy).
+
+---
+
+## 🔐 Credenciales por Defecto
+
+Configuraciones definidas en el `docker-compose.yml`:
+
+* **Base de Datos (MariaDB):**
+    * Usuario: `micasa_user`
+    * Password: `FB.Energia2022`
+    * Database: `MCE`
+    * Puerto externo: `3307`
+
+---
+
+## 📡 Documentación de API (Endpoints)
+
+El Frontend se comunica con el Backend mediante los siguientes endpoints principales:
+
+| Método | Endpoint | Descripción |
+| :--- | :--- | :--- |
+| `GET` | `/mi_casa_eficiente/comunas/` | Obtiene lista de regiones y comunas. |
+| `POST` | `/mi_casa_eficiente/comunas/` | **Paso 1-3:** Crea la sesión, guarda ubicación y calcula demanda inicial. |
+| `PUT` | `/mi_casa_eficiente/demanda/<id>` | **Paso 4:** Actualiza flag si el usuario conoce su consumo. |
+| `PUT` | `/mi_casa_eficiente/edita_consumo/<id>` | **Paso 4:** Guarda los consumos reales (boleta) ingresados por usuario. |
+| `PUT` | `/mi_casa_eficiente/equipos/<id>` | **Paso 5:** Actualiza flag de edición de equipos. |
+| `PUT` | `/mi_casa_eficiente/edita_equipos/<id>` | **Paso 5:** Guarda el inventario detallado de equipos y recalcula balance. |
+| `PUT` | `/mi_casa_eficiente/recomendaciones/<id>`| **Paso 6:** Guarda las IDs de las recomendaciones seleccionadas. |
+| `GET` | `/mi_casa_eficiente/recomendaciones_select/<id>` | **Paso 6-7:** Obtiene los resultados finales calculados (Ahorro, ROI, CO2). |
+
+---
+
+## 📂 Estructura del Proyecto
+
+```text
+/
+├── docker-compose.yml          # Orquestación de contenedores
+├── Dockerfile.backend          # Imagen de Django
+├── Dockerfile.frontend         # Imagen de Nginx
+├── Back-end/
+│   └── GEV/
+│       ├── manage.py           # CLI de Django
+│       └── apps/
+│           └── mi_casa_eficiente/
+│               ├── api/        # Endpoints y Serializers
+│               ├── models.py   # Modelos de BBDD
+│               └── views.py    # Lógica de negocio
+└── Front-end/
+    ├── web_front/
+    │   ├── html/index.html     # Punto de entrada HTML
+    │   ├── js/main.js          # Lógica principal del Frontend
+    │   └── css/                # Estilos Tailwind
+    └── nginx.conf              # Configuración del servidor web
+```
+
+---
+
+## 🐛 Solución de Problemas Comunes
+
+1.  **Error de Base de Datos al iniciar:**
+    * Si es la primera vez que ejecutas, asegúrate de que el volumen `mariadb_data` no tenga datos corruptos de instalaciones previas. Puedes limpiarlo con:
     ```bash
-    docker-compose up --build
+    docker-compose down -v
     ```
-    *Este comando descargará las imágenes necesarias, construirá el backend y frontend, iniciará la base de datos y cargará automáticamente los datos base (comunas, equipos, etc.).*
 
-3.  **Acceder a la aplicación**:
-    Abre tu navegador y visita:
-    👉 **https://localhost:4453**
-    
-    *(Nota: Es normal ver una advertencia de seguridad debido al certificado SSL autofirmado de desarrollo. Debes aceptarla para continuar).*
+2.  **No cargan los datos (Comunas vacías):**
+    * Verifica que el script `load_initial_data` se haya ejecutado correctamente en el contenedor `backend`. Puedes forzarlo manualmente:
+        ```bash
+        docker exec -it micasa_backend python manage.py load_initial_data
+        ```
 
----
-
-## 📖 Flujo de Uso y Funcionalidad
-
-La aplicación guía al usuario a través de un proceso lineal de 5 pasos:
-
-### 1. Identificación y Ubicación (`/comunas/`)
-*   **Usuario**: Selecciona su Región, Comuna y Clima específico. Ingresa datos de la vivienda (Tipo, Superficie, Año de construcción).
-*   **Sistema**: Determina la Zona Térmica y la normativa aplicable (NCh 1079). Crea una nueva sesión de evaluación.
-
-### 2. Demanda Energética (`/demanda/` y `/edita_consumo/`)
-*   **Usuario**: Indica qué combustibles usa (Electricidad, Gas Natural, Leña, etc.).
-*   **Opciones**:
-    *   *Si conoce su consumo*: Ingresa los montos mensuales de sus boletas.
-    *   *Si NO conoce su consumo*: El sistema realiza una estimación basada en la superficie y características ingresadas.
-
-### 3. Equipamiento (`/equipos/`)
-*   **Sistema**: Propone un inventario de equipos "base" (Cocina, Refrigerador, Calefacción) típico para el tipo de hogar.
-*   **Usuario**: Revisa y edita este inventario, ajustando cantidades y tipos de artefactos para reflejar la realidad de su hogar.
-
-### 4. Recomendaciones (`/recomendaciones/`)
-*   **Sistema**: Calcula medidas de eficiencia energética viables (ej. "Mejorar aislación de techo", "Cambiar a iluminación LED", "Renovar refrigerador").
-*   **Usuario**: Selecciona cuáles de estas recomendaciones le interesa implementar.
-
-### 5. Resultados (`/equipos_select/` o Resultados Finales)
-*   **Sistema**: Genera un reporte final comparativo.
-    *   Muestra el ahorro potencial en dinero ($CLP).
-    *   Estima la reducción de emisiones de CO2.
-    *   Presenta gráficos comparativos entre la situación "Base" y la situación "Eficiente".
+3.  **Problemas de CORS:**
+    * Asegúrate de estar accediendo a través del puerto configurado en Nginx (8082) y no directamente al backend, para evitar problemas de dominios cruzados si no están configurados.
 
 ---
-
-## 📡 Documentación de API (Backend)
-
-Todos los endpoints se encuentran bajo el prefijo `/mi_casa_eficiente/`.
-
-### Gestión de Sesión y Ubicación
-| Endpoint | Método | Descripción | Payload / Parametros |
-| :--- | :---: | :--- | :--- |
-| `comunas/` | `GET` | Obtiene lista de Regiones y Comunas. | - |
-| `comunas/` | `POST` | Inicia una evaluación. | `{id_comuna, clima, vivienda, superficie, ...}` |
-
-### Demanda y Consumo
-| Endpoint | Método | Descripción | Payload / Parametros |
-| :--- | :---: | :--- | :--- |
-| `demanda/<pk>` | `GET` | Obtiene estado de demanda. | - |
-| `demanda/<pk>` | `PUT` | Actualiza flag "¿Conoce su consumo?". | `{conoce_consumo: true/false}` |
-| `edita_consumo/<pk>` | `GET` | Obtiene perfiles de consumo. | - |
-| `edita_consumo/<pk>` | `PUT` | Guarda datos mensuales reales. | `{con_elec: [...], con_gn: [...]}` |
-
-### Equipamiento
-| Endpoint | Método | Descripción | Payload / Parametros |
-| :--- | :---: | :--- | :--- |
-| `equipos/<pk>` | `GET` | Obtiene inventario de equipos propuesto. | - |
-| `equipos/<pk>` | `PUT` | Actualiza flag "¿Edita equipos?". | `{ha_editado_equipos: true/false}` |
-| `edita_equipos/<pk>` | `PUT` | Guarda cambios en el inventario. | `{equipos: [...]}` |
-
-### Resultados
-| Endpoint | Método | Descripción | Payload / Parametros |
-| :--- | :---: | :--- | :--- |
-| `recomendaciones/<pk>` | `GET` | Obtiene lista de recomendaciones calculadas. | - |
-| `recomendaciones/<pk>` | `PUT` | Guarda las recomendaciones seleccionadas. | `{seleccion: [...]}` |
-| `recomendaciones_select/<pk>` | `GET` | Obtiene el reporte final priorizado. | - |
-
----
-
-## 📁 Estructura de Archivos Clave
-
-*   **`docker-compose.yml`**: Orquestación de servicios y redes.
-*   **`Back-end/GEV/apps/mi_casa_eficiente/`**:
-    *   `api/urls.py`: Mapeo de rutas API.
-    *   `api/api.py`: Lógica de los endpoints (Views).
-    *   `api/serializers.py`: Lógica del negocio y validación de datos.
-    *   `management/commands/load_initial_data.py`: Script de carga automática de datos.
-*   **`Front-end/web_front/`**:
-    *   `js/main.js`: Lógica principal del Frontend, manejo de estado y llamadas a API.
-    *   `html/index.html`: Estructura principal de la web.
-
+*Desarrollado para el Ministerio de Energía - Iniciativa Mi Casa Eficiente.*
