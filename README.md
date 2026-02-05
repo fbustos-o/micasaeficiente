@@ -68,7 +68,7 @@ Este comando realizará automáticamente:
 Una vez que los contenedores estén corriendo (puedes verificar con `docker ps`), accede a:
 
 * **Aplicación Web (Frontend):** [http://localhost:8082](http://localhost:8082)
-* **Panel de Administración (Backend):** [http://localhost:8000/admin](http://localhost:8000/admin) (Nota: El puerto 8000 debe estar expuesto en el compose si deseas acceder directamente, o via Nginx si está configurado el proxy).
+* **Panel de Administración (Backend):** [http://localhost:8000/admin](http://localhost:8000/admin) (Nota: El puerto 8000 debe estar expuesto en el compose si deseas acceder directamente, o via Nginx si está configurado el proxy). EN LA VERSIÓN MASTER ESTE SITIO SE DEBE CERRAR
 
 ---
 
